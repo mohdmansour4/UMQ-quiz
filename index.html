@@ -19,6 +19,10 @@
             margin-bottom: 20px;
             text-align: right; /* Align text to the right for readability */
         }
+        label {
+            display: block; /* Make sure each radio button and its label are on a new line */
+            margin: 5px 0;
+        }
         button {
             padding: 10px 20px;
             background-color: #4CAF50;
@@ -37,83 +41,83 @@
         <h1>الاختبار</h1>
         <div id="quiz">
             <!-- Question 1 -->
-            <div class="question" data-answers="q1">
+            <div class="question">
                 <p>1. ما هي عاصمة فرنسا؟</p>
-                <input type="radio" name="q1" value="correct"> باريس<br>
-                <input type="radio" name="q1" value="wrong"> لندن<br>
-                <input type="radio" name="q1" value="wrong"> برلين<br>
+                <label><input type="radio" name="q1" value="correct"> باريس</label>
+                <label><input type="radio" name="q1" value="wrong"> لندن</label>
+                <label><input type="radio" name="q1" value="wrong"> برلين</label>
             </div>
 
             <!-- Question 2 -->
-            <div class="question" data-answers="q2">
+            <div class="question">
                 <p>2. كم يساوي ٢ + ٢؟</p>
-                <input type="radio" name="q2" value="wrong"> ٣<br>
-                <input type="radio" name="q2" value="correct"> ٤<br>
-                <input type="radio" name="q2" value="wrong"> ٥<br>
+                <label><input type="radio" name="q2" value="wrong"> ٣</label>
+                <label><input type="radio" name="q2" value="correct"> ٤</label>
+                <label><input type="radio" name="q2" value="wrong"> ٥</label>
             </div>
 
             <!-- Question 3 -->
-            <div class="question" data-answers="q3">
+            <div class="question">
                 <p>3. من كتب "هاملت"؟</p>
-                <input type="radio" name="q3" value="correct"> وليم شكسبير<br>
-                <input type="radio" name="q3" value="wrong"> تشارلز ديكنز<br>
-                <input type="radio" name="q3" value="wrong"> مارك توين<br>
+                <label><input type="radio" name="q3" value="correct"> وليم شكسبير</label>
+                <label><input type="radio" name="q3" value="wrong"> تشارلز ديكنز</label>
+                <label><input type="radio" name="q3" value="wrong"> مارك توين</label>
             </div>
 
             <!-- Question 4 -->
-            <div class="question" data-answers="q4">
+            <div class="question">
                 <p>4. ما هي درجة غليان الماء بالدرجة المئوية؟</p>
-                <input type="radio" name="q4" value="correct"> ١٠٠°<br>
-                <input type="radio" name="q4" value="wrong"> ٩٠°<br>
-                <input type="radio" name="q4" value="wrong"> ١١٠°<br>
+                <label><input type="radio" name="q4" value="correct"> ١٠٠°</label>
+                <label><input type="radio" name="q4" value="wrong"> ٩٠°</label>
+                <label><input type="radio" name="q4" value="wrong"> ١١٠°</label>
             </div>
 
             <!-- Question 5 -->
-            <div class="question" data-answers="q5">
+            <div class="question">
                 <p>5. ما هو الجذر التربيعي للعدد ٩؟</p>
-                <input type="radio" name="q5" value="correct"> ٣<br>
-                <input type="radio" name="q5" value="wrong"> ٢<br>
-                <input type="radio" name="q5" value="wrong"> ٤<br>
+                <label><input type="radio" name="q5" value="correct"> ٣</label>
+                <label><input type="radio" name="q5" value="wrong"> ٢</label>
+                <label><input type="radio" name="q5" value="wrong"> ٤</label>
             </div>
 
             <!-- Question 6 -->
-            <div class="question" data-answers="q6">
+            <div class="question">
                 <p>6. ما هو أكبر كوكب في نظامنا الشمسي؟</p>
-                <input type="radio" name="q6" value="correct"> المشتري<br>
-                <input type="radio" name="q6" value="wrong"> المريخ<br>
-                <input type="radio" name="q6" value="wrong"> الأرض<br>
+                <label><input type="radio" name="q6" value="correct"> المشتري</label>
+                <label><input type="radio" name="q6" value="wrong"> المريخ</label>
+                <label><input type="radio" name="q6" value="wrong"> الأرض</label>
             </div>
 
             <!-- Question 7 -->
-            <div class="question" data-answers="q7">
+            <div class="question">
                 <p>7. ما هو الرمز الكيميائي للماء؟</p>
-                <input type="radio" name="q7" value="correct"> H₂O<br>
-                <input type="radio" name="q7" value="wrong"> CO₂<br>
-                <input type="radio" name="q7" value="wrong"> O₂<br>
+                <label><input type="radio" name="q7" value="correct"> H₂O</label>
+                <label><input type="radio" name="q7" value="wrong"> CO₂</label>
+                <label><input type="radio" name="q7" value="wrong"> O₂</label>
             </div>
 
             <!-- Question 8 -->
-            <div class="question" data-answers="q8">
+            <div class="question">
                 <p>8. من الذي رسم لوحة الموناليزا؟</p>
-                <input type="radio" name="q8" value="correct"> ليوناردو دافنشي<br>
-                <input type="radio" name="q8" value="wrong"> بابلو بيكاسو<br>
-                <input type="radio" name="q8" value="wrong"> فينسنت فان غوخ<br>
+                <label><input type="radio" name="q8" value="correct"> ليوناردو دافنشي</label>
+                <label><input type="radio" name="q8" value="wrong"> بابلو بيكاسو</label>
+                <label><input type="radio" name="q8" value="wrong"> فينسنت فان غوخ</label>
             </div>
 
             <!-- Question 9 -->
-            <div class="question" data-answers="q9">
+            <div class="question">
                 <p>9. ما هو الغاز الأكثر وفرة في الغلاف الجوي للأرض؟</p>
-                <input type="radio" name="q9" value="correct"> النيتروجين<br>
-                <input type="radio" name="q9" value="wrong"> الأكسجين<br>
-                <input type="radio" name="q9" value="wrong"> ثاني أكسيد الكربون<br>
+                <label><input type="radio" name="q9" value="correct"> النيتروجين</label>
+                <label><input type="radio" name="q9" value="wrong"> الأكسجين</label>
+                <label><input type="radio" name="q9" value="wrong"> ثاني أكسيد الكربون</label>
             </div>
 
             <!-- Question 10 -->
-            <div class="question" data-answers="q10">
+            <div class="question">
                 <p>10. كم عدد القارات الموجودة؟</p>
-                <input type="radio" name="q10" value="correct"> ٧<br>
-                <input type="radio" name="q10" value="wrong"> ٦<br>
-                <input type="radio" name="q10" value="wrong"> ٨<br>
+                <label><input type="radio" name="q10" value="correct"> ٧</label>
+                <label><input type="radio" name="q10" value="wrong"> ٦</label>
+                <label><input type="radio" name="q10" value="wrong"> ٨</label>
             </div>
 
             <button onclick="submitQuiz()">إرسال</button>
@@ -139,19 +143,16 @@
         function shuffleAnswers() {
             const questions = document.querySelectorAll('.question');
             questions.forEach(question => {
-                const answers = Array.from(question.querySelectorAll('input[type="radio"]'));
-                const labels = Array.from(question.querySelectorAll('br, input'));
+                const answers = Array.from(question.querySelectorAll('label'));
                 
                 // Shuffle the answers
                 for (let i = answers.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     [answers[i], answers[j]] = [answers[j], answers[i]];
-                    [labels[i*2], labels[j*2]] = [labels[j*2], labels[i*2]]; // Shuffle br elements too
                 }
                 
                 // Append the shuffled answers back to the DOM
                 answers.forEach(answer => question.appendChild(answer));
-                labels.forEach(label => question.appendChild(label));
             });
         }
 
