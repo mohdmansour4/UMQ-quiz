@@ -146,12 +146,6 @@
             }
         ];
 
-        // Function to get query parameters from URL
-        function getQueryParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-
         // Get the score from the URL and calculate passing criteria
         const passPercentage = 80; // Required percentage to pass
         const resultElement = document.getElementById('score-result');
