@@ -37,7 +37,7 @@
         <h1>الاختبار</h1>
         <div id="quiz">
             <!-- Question 1 -->
-            <div class="question">
+            <div class="question" data-answers="q1">
                 <p>1. ما هي عاصمة فرنسا؟</p>
                 <input type="radio" name="q1" value="correct"> باريس<br>
                 <input type="radio" name="q1" value="wrong"> لندن<br>
@@ -45,7 +45,7 @@
             </div>
 
             <!-- Question 2 -->
-            <div class="question">
+            <div class="question" data-answers="q2">
                 <p>2. كم يساوي ٢ + ٢؟</p>
                 <input type="radio" name="q2" value="wrong"> ٣<br>
                 <input type="radio" name="q2" value="correct"> ٤<br>
@@ -53,7 +53,7 @@
             </div>
 
             <!-- Question 3 -->
-            <div class="question">
+            <div class="question" data-answers="q3">
                 <p>3. من كتب "هاملت"؟</p>
                 <input type="radio" name="q3" value="correct"> وليم شكسبير<br>
                 <input type="radio" name="q3" value="wrong"> تشارلز ديكنز<br>
@@ -61,7 +61,7 @@
             </div>
 
             <!-- Question 4 -->
-            <div class="question">
+            <div class="question" data-answers="q4">
                 <p>4. ما هي درجة غليان الماء بالدرجة المئوية؟</p>
                 <input type="radio" name="q4" value="correct"> ١٠٠°<br>
                 <input type="radio" name="q4" value="wrong"> ٩٠°<br>
@@ -69,7 +69,7 @@
             </div>
 
             <!-- Question 5 -->
-            <div class="question">
+            <div class="question" data-answers="q5">
                 <p>5. ما هو الجذر التربيعي للعدد ٩؟</p>
                 <input type="radio" name="q5" value="correct"> ٣<br>
                 <input type="radio" name="q5" value="wrong"> ٢<br>
@@ -77,7 +77,7 @@
             </div>
 
             <!-- Question 6 -->
-            <div class="question">
+            <div class="question" data-answers="q6">
                 <p>6. ما هو أكبر كوكب في نظامنا الشمسي؟</p>
                 <input type="radio" name="q6" value="correct"> المشتري<br>
                 <input type="radio" name="q6" value="wrong"> المريخ<br>
@@ -85,7 +85,7 @@
             </div>
 
             <!-- Question 7 -->
-            <div class="question">
+            <div class="question" data-answers="q7">
                 <p>7. ما هو الرمز الكيميائي للماء؟</p>
                 <input type="radio" name="q7" value="correct"> H₂O<br>
                 <input type="radio" name="q7" value="wrong"> CO₂<br>
@@ -93,7 +93,7 @@
             </div>
 
             <!-- Question 8 -->
-            <div class="question">
+            <div class="question" data-answers="q8">
                 <p>8. من الذي رسم لوحة الموناليزا؟</p>
                 <input type="radio" name="q8" value="correct"> ليوناردو دافنشي<br>
                 <input type="radio" name="q8" value="wrong"> بابلو بيكاسو<br>
@@ -101,7 +101,7 @@
             </div>
 
             <!-- Question 9 -->
-            <div class="question">
+            <div class="question" data-answers="q9">
                 <p>9. ما هو الغاز الأكثر وفرة في الغلاف الجوي للأرض؟</p>
                 <input type="radio" name="q9" value="correct"> النيتروجين<br>
                 <input type="radio" name="q9" value="wrong"> الأكسجين<br>
@@ -109,7 +109,7 @@
             </div>
 
             <!-- Question 10 -->
-            <div class="question">
+            <div class="question" data-answers="q10">
                 <p>10. كم عدد القارات الموجودة؟</p>
                 <input type="radio" name="q10" value="correct"> ٧<br>
                 <input type="radio" name="q10" value="wrong"> ٦<br>
@@ -124,11 +124,36 @@
         // This function will run when the page loads from cache (when pressing back button)
         window.addEventListener('pageshow', function(event) {
             if (event.persisted) {
-                // Reset the radio buttons when the page is loaded from cache
-                const radioButtons = document.querySelectorAll('input[type="radio"]');
-                radioButtons.forEach(radio => radio.checked = false);
+                resetRadioButtons();
             }
+            shuffleAnswers();
         });
+
+        // Function to reset radio buttons when the page is loaded from cache
+        function resetRadioButtons() {
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.checked = false);
+        }
+
+        // Function to shuffle answers for each question
+        function shuffleAnswers() {
+            const questions = document.querySelectorAll('.question');
+            questions.forEach(question => {
+                const answers = Array.from(question.querySelectorAll('input[type="radio"]'));
+                const labels = Array.from(question.querySelectorAll('br, input'));
+                
+                // Shuffle the answers
+                for (let i = answers.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [answers[i], answers[j]] = [answers[j], answers[i]];
+                    [labels[i*2], labels[j*2]] = [labels[j*2], labels[i*2]]; // Shuffle br elements too
+                }
+                
+                // Append the shuffled answers back to the DOM
+                answers.forEach(answer => question.appendChild(answer));
+                labels.forEach(label => question.appendChild(label));
+            });
+        }
 
         function submitQuiz() {
             const correctAnswers = document.querySelectorAll('input[type="radio"][value="correct"]:checked').length;
@@ -138,6 +163,9 @@
             // Redirect to the results page with the score as a query parameter
             window.location.href = `results.html?score=${score.toFixed(2)}`;
         }
+
+        // Shuffle the answers when the page is loaded
+        window.onload = shuffleAnswers;
     </script>
 </body>
 </html>
