@@ -18,39 +18,19 @@
             background-color: white;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        .result-header {
             text-align: center;
-            margin-bottom: 20px;
-        }
-        .question {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #ccc;
-        }
-        h3 {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .answer {
-            margin: 5px 0;
-            padding: 5px 10px;
-            border-radius: 5px;
-            display: block;
-        }
-        .answer.selected {
-            background-color: #d9edf7; /* Light blue for selected answer */
         }
         .result-summary {
             font-size: 18px;
-            text-align: center;
             margin: 20px 0;
         }
         .pass {
             color: green;
+            font-weight: bold;
         }
         .fail {
             color: red;
+            font-weight: bold;
         }
         button {
             padding: 10px 20px;
@@ -60,7 +40,7 @@
             cursor: pointer;
             font-size: 18px;
             display: block;
-            margin: 0 auto;
+            margin: 20px auto;
         }
         button:hover {
             background-color: #45a049;
@@ -69,84 +49,38 @@
 </head>
 <body>
     <div class="result-container">
-        <div class="result-header">
-            <h1>ملخص الإجابات</h1>
-            <div id="score-result" class="result-summary"></div>
-        </div>
-
-        <!-- Questions and answers will be displayed here -->
-        <div id="questions-container"></div>
-
+        <h1>نتيجة الاختبار</h1>
+        <div id="score-result" class="result-summary"></div>
+        <div id="pass-fail-message"></div>
         <button id="next-chapter" onclick="goToNextChapter()" style="display:none;">الانتقال إلى الفصل التالي</button>
     </div>
 
     <script>
-        // Full list of 10 questions with possible answers and correct answers
-        const questions = [
-            { question: 'ما هي عاصمة فرنسا؟', answers: ['باريس', 'لندن', 'برلين'], correctAnswer: 'باريس' },
-            { question: 'كم يساوي ٢ + ٢؟', answers: ['٣', '٤', '٥'], correctAnswer: '٤' },
-            { question: 'من كتب "هاملت"؟', answers: ['وليم شكسبير', 'تشارلز ديكنز', 'مارك توين'], correctAnswer: 'وليم شكسبير' }
-            // Add more questions here...
-        ];
-
-        // Function to get the score and answers from the URL parameter
-        function getAnswersFromURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const answers = JSON.parse(decodeURIComponent(urlParams.get('answers')));
-            return answers;
-        }
-
+        // Function to get the score from the URL parameter
         function getScoreFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             return parseFloat(urlParams.get('score')) || 0;
         }
 
         function displayResults() {
-            const questionsContainer = document.getElementById('questions-container');
             const resultElement = document.getElementById('score-result');
+            const passFailMessage = document.getElementById('pass-fail-message');
             const nextChapterButton = document.getElementById('next-chapter');
-
-            // Get the user's selected answers from the URL
-            const userAnswers = getAnswersFromURL();
-
-            // Loop through all questions and display them
-            questions.forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('question');
-
-                // Display the question
-                questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
-
-                // Display the answers with the user's selected answer highlighted
-                q.answers.forEach(answer => {
-                    const answerDiv = document.createElement('div');
-                    answerDiv.classList.add('answer');
-
-                    // Highlight the user's selected answer
-                    if (answer === userAnswers[`q${index + 1}`]) {
-                        answerDiv.classList.add('selected');
-                    }
-
-                    answerDiv.innerText = answer;
-                    questionDiv.appendChild(answerDiv);
-                });
-
-                // Append the question and answers to the container
-                questionsContainer.appendChild(questionDiv);
-            });
 
             // Get the score from the URL and display it
             const score = getScoreFromURL();
-            resultElement.innerHTML = `نتيجتك: ${score.toFixed(2)}%<br>`;
+            const passPercentage = 80.0; // Set the pass percentage to 80%
+
+            resultElement.innerHTML = `لقد حصلت على: ${score.toFixed(2)}%<br>الحد الأدنى للاجتياز: ${passPercentage.toFixed(2)}%`;
 
             // 80% pass rule
-            if (score >= 80) {
-                resultElement.classList.add('pass');
-                resultElement.innerHTML += 'لقد اجتزت الاختبار!';
+            if (score >= passPercentage) {
+                passFailMessage.classList.add('pass');
+                passFailMessage.innerHTML = 'مبروك! لقد اجتزت الاختبار!';
                 nextChapterButton.style.display = 'inline-block'; // Show "Next Chapter" button
             } else {
-                resultElement.classList.add('fail');
-                resultElement.innerHTML += 'للأسف لم تجتز الاختبار. تحتاج إلى 80% للاجتياز.';
+                passFailMessage.classList.add('fail');
+                passFailMessage.innerHTML = 'للأسف، لم تجتز الاختبار. تحتاج إلى 80% للاجتياز.';
             }
         }
 
