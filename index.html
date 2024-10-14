@@ -6,22 +6,32 @@
     <title>الاختبار</title>
     <style>
         body {
-            direction: rtl; /* Set the direction to right-to-left */
-            text-align: center; /* Center the text */
+            direction: rtl; /* Right to left layout */
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f9f9f9;
         }
-        .quiz-container {
-            max-width: 600px;
-            margin: auto;
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
         .question {
             margin-bottom: 20px;
-            text-align: right; /* Align text to the right for readability */
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+        h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
         label {
-            display: block; /* Make sure each radio button and its label are on a new line */
             margin: 5px 0;
+            display: block;
         }
         button {
             padding: 10px 20px;
@@ -37,136 +47,114 @@
     </style>
 </head>
 <body>
-    <div class="quiz-container">
+    <div class="container">
         <h1>الاختبار</h1>
-        <div id="quiz">
+        <form id="quizForm">
             <!-- Question 1 -->
             <div class="question">
-                <p>1. ما هي عاصمة فرنسا؟</p>
-                <label><input type="radio" name="q1" value="correct"> باريس</label>
-                <label><input type="radio" name="q1" value="wrong"> لندن</label>
-                <label><input type="radio" name="q1" value="wrong"> برلين</label>
+                <h3>1. ما هي عاصمة فرنسا؟</h3>
+                <label><input type="radio" name="q1" value="باريس"> باريس</label>
+                <label><input type="radio" name="q1" value="لندن"> لندن</label>
+                <label><input type="radio" name="q1" value="برلين"> برلين</label>
             </div>
 
             <!-- Question 2 -->
             <div class="question">
-                <p>2. كم يساوي ٢ + ٢؟</p>
-                <label><input type="radio" name="q2" value="wrong"> ٣</label>
-                <label><input type="radio" name="q2" value="correct"> ٤</label>
-                <label><input type="radio" name="q2" value="wrong"> ٥</label>
+                <h3>2. كم يساوي ٢ + ٢؟</h3>
+                <label><input type="radio" name="q2" value="٣"> ٣</label>
+                <label><input type="radio" name="q2" value="٤"> ٤</label>
+                <label><input type="radio" name="q2" value="٥"> ٥</label>
             </div>
 
             <!-- Question 3 -->
             <div class="question">
-                <p>3. من كتب "هاملت"؟</p>
-                <label><input type="radio" name="q3" value="correct"> وليم شكسبير</label>
-                <label><input type="radio" name="q3" value="wrong"> تشارلز ديكنز</label>
-                <label><input type="radio" name="q3" value="wrong"> مارك توين</label>
+                <h3>3. من كتب "هاملت"؟</h3>
+                <label><input type="radio" name="q3" value="وليم شكسبير"> وليم شكسبير</label>
+                <label><input type="radio" name="q3" value="تشارلز ديكنز"> تشارلز ديكنز</label>
+                <label><input type="radio" name="q3" value="مارك توين"> مارك توين</label>
             </div>
 
             <!-- Question 4 -->
             <div class="question">
-                <p>4. ما هي درجة غليان الماء بالدرجة المئوية؟</p>
-                <label><input type="radio" name="q4" value="correct"> ١٠٠°</label>
-                <label><input type="radio" name="q4" value="wrong"> ٩٠°</label>
-                <label><input type="radio" name="q4" value="wrong"> ١١٠°</label>
+                <h3>4. ما هي درجة غليان الماء بالدرجة المئوية؟</h3>
+                <label><input type="radio" name="q4" value="١٠٠°"> ١٠٠°</label>
+                <label><input type="radio" name="q4" value="٩٠°"> ٩٠°</label>
+                <label><input type="radio" name="q4" value="١١٠°"> ١١٠°</label>
             </div>
 
             <!-- Question 5 -->
             <div class="question">
-                <p>5. ما هو الجذر التربيعي للعدد ٩؟</p>
-                <label><input type="radio" name="q5" value="correct"> ٣</label>
-                <label><input type="radio" name="q5" value="wrong"> ٢</label>
-                <label><input type="radio" name="q5" value="wrong"> ٤</label>
+                <h3>5. ما هو الجذر التربيعي للعدد ٩؟</h3>
+                <label><input type="radio" name="q5" value="٢"> ٢</label>
+                <label><input type="radio" name="q5" value="٣"> ٣</label>
+                <label><input type="radio" name="q5" value="٤"> ٤</label>
             </div>
 
             <!-- Question 6 -->
             <div class="question">
-                <p>6. ما هو أكبر كوكب في نظامنا الشمسي؟</p>
-                <label><input type="radio" name="q6" value="correct"> المشتري</label>
-                <label><input type="radio" name="q6" value="wrong"> المريخ</label>
-                <label><input type="radio" name="q6" value="wrong"> الأرض</label>
+                <h3>6. ما هو أكبر كوكب في نظامنا الشمسي؟</h3>
+                <label><input type="radio" name="q6" value="المشتري"> المشتري</label>
+                <label><input type="radio" name="q6" value="المريخ"> المريخ</label>
+                <label><input type="radio" name="q6" value="الأرض"> الأرض</label>
             </div>
 
             <!-- Question 7 -->
             <div class="question">
-                <p>7. ما هو الرمز الكيميائي للماء؟</p>
-                <label><input type="radio" name="q7" value="correct"> H₂O</label>
-                <label><input type="radio" name="q7" value="wrong"> CO₂</label>
-                <label><input type="radio" name="q7" value="wrong"> O₂</label>
+                <h3>7. ما هو الرمز الكيميائي للماء؟</h3>
+                <label><input type="radio" name="q7" value="H₂O"> H₂O</label>
+                <label><input type="radio" name="q7" value="CO₂"> CO₂</label>
+                <label><input type="radio" name="q7" value="O₂"> O₂</label>
             </div>
 
             <!-- Question 8 -->
             <div class="question">
-                <p>8. من الذي رسم لوحة الموناليزا؟</p>
-                <label><input type="radio" name="q8" value="correct"> ليوناردو دافنشي</label>
-                <label><input type="radio" name="q8" value="wrong"> بابلو بيكاسو</label>
-                <label><input type="radio" name="q8" value="wrong"> فينسنت فان غوخ</label>
+                <h3>8. من الذي رسم لوحة الموناليزا؟</h3>
+                <label><input type="radio" name="q8" value="ليوناردو دافنشي"> ليوناردو دافنشي</label>
+                <label><input type="radio" name="q8" value="بابلو بيكاسو"> بابلو بيكاسو</label>
+                <label><input type="radio" name="q8" value="فينسنت فان غوخ"> فينسنت فان غوخ</label>
             </div>
 
             <!-- Question 9 -->
             <div class="question">
-                <p>9. ما هو الغاز الأكثر وفرة في الغلاف الجوي للأرض؟</p>
-                <label><input type="radio" name="q9" value="correct"> النيتروجين</label>
-                <label><input type="radio" name="q9" value="wrong"> الأكسجين</label>
-                <label><input type="radio" name="q9" value="wrong"> ثاني أكسيد الكربون</label>
+                <h3>9. ما هو الغاز الأكثر وفرة في الغلاف الجوي للأرض؟</h3>
+                <label><input type="radio" name="q9" value="النيتروجين"> النيتروجين</label>
+                <label><input type="radio" name="q9" value="الأكسجين"> الأكسجين</label>
+                <label><input type="radio" name="q9" value="ثاني أكسيد الكربون"> ثاني أكسيد الكربون</label>
             </div>
 
             <!-- Question 10 -->
             <div class="question">
-                <p>10. كم عدد القارات الموجودة؟</p>
-                <label><input type="radio" name="q10" value="correct"> ٧</label>
-                <label><input type="radio" name="q10" value="wrong"> ٦</label>
-                <label><input type="radio" name="q10" value="wrong"> ٨</label>
+                <h3>10. كم عدد القارات الموجودة؟</h3>
+                <label><input type="radio" name="q10" value="٧"> ٧</label>
+                <label><input type="radio" name="q10" value="٦"> ٦</label>
+                <label><input type="radio" name="q10" value="٨"> ٨</label>
             </div>
 
-            <button onclick="submitQuiz()">إرسال</button>
-        </div>
+            <button type="submit">إرسال الإجابات</button>
+        </form>
     </div>
 
     <script>
-        // This function will run when the page loads from cache (when pressing back button)
-        window.addEventListener('pageshow', function(event) {
-            if (event.persisted) {
-                resetRadioButtons();
-            }
-            shuffleAnswers();
-        });
+        // Capture the user's answers and redirect to the results page
+        document.getElementById('quizForm').onsubmit = function (e) {
+            e.preventDefault();
 
-        // Function to reset radio buttons when the page is loaded from cache
-        function resetRadioButtons() {
-            const radioButtons = document.querySelectorAll('input[type="radio"]');
-            radioButtons.forEach(radio => radio.checked = false);
-        }
-
-        // Function to shuffle answers for each question
-        function shuffleAnswers() {
-            const questions = document.querySelectorAll('.question');
-            questions.forEach(question => {
-                const answers = Array.from(question.querySelectorAll('label'));
-                
-                // Shuffle the answers
-                for (let i = answers.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [answers[i], answers[j]] = [answers[j], answers[i]];
-                }
-                
-                // Append the shuffled answers back to the DOM
-                answers.forEach(answer => question.appendChild(answer));
+            // Get the selected answers from the form
+            const formData = new FormData(this);
+            const answers = {};
+            formData.forEach((value, key) => {
+                answers[key] = value;
             });
+
+            // Convert the answers to a URL-encoded string to pass via URL
+            const encodedAnswers = encodeURIComponent(JSON.stringify(answers));
+
+            // Assuming the score is calculated dynamically, but hardcoded here as an example (e.g., 90%)
+            const score = 90.00;
+
+            // Redirect to the results page with the answers and score
+            window.location.href = `results.html?answers=${encodedAnswers}&score=${score}`;
         }
-
-        function submitQuiz() {
-            const correctAnswers = document.querySelectorAll('input[type="radio"][value="correct"]:checked').length;
-            const totalQuestions = document.querySelectorAll('.question').length;
-            const score = (correctAnswers / totalQuestions) * 100;
-
-            // Redirect to the results page with the score as a query parameter
-            window.location.href = `results.html?score=${score.toFixed(2)}`;
-        }
-
-        // Shuffle the answers when the page is loaded
-        window.onload = shuffleAnswers;
     </script>
 </body>
 </html>
