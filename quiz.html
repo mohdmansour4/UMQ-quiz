@@ -121,6 +121,12 @@
     </div>
 
     <script>
+        // This function will run when the page loads to reset any checked radio buttons
+        window.onload = function() {
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.checked = false);
+        };
+
         function submitQuiz() {
             const correctAnswers = document.querySelectorAll('input[type="radio"][value="correct"]:checked').length;
             const totalQuestions = document.querySelectorAll('.question').length;
