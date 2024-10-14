@@ -76,40 +76,71 @@
     </div>
 
     <script>
-        // Sample questions and answers (replace with actual quiz data)
+        // Full list of 10 questions with possible answers and the user's selected answer
         const questions = [
             { 
                 question: 'ما هي عاصمة فرنسا؟', 
                 answers: ['باريس', 'لندن', 'برلين'], 
-                yourAnswer: 'لندن' // Example of chosen answer
+                yourAnswer: 'لندن'
             },
             { 
                 question: 'كم يساوي ٢ + ٢؟', 
                 answers: ['٣', '٤', '٥'], 
-                yourAnswer: '٤' // Chosen answer
+                yourAnswer: '٤'
             },
             { 
                 question: 'من كتب "هاملت"؟', 
                 answers: ['وليم شكسبير', 'تشارلز ديكنز', 'مارك توين'], 
-                yourAnswer: 'تشارلز ديكنز' // Example of chosen answer
+                yourAnswer: 'تشارلز ديكنز'
+            },
+            { 
+                question: 'ما هي درجة غليان الماء بالدرجة المئوية؟', 
+                answers: ['١٠٠°', '٩٠°', '١١٠°'], 
+                yourAnswer: '٩٠°'
+            },
+            { 
+                question: 'ما هو الجذر التربيعي للعدد ٩؟', 
+                answers: ['٢', '٣', '٤'], 
+                yourAnswer: '٣'
+            },
+            { 
+                question: 'ما هو أكبر كوكب في نظامنا الشمسي؟', 
+                answers: ['المشتري', 'المريخ', 'الأرض'], 
+                yourAnswer: 'المشتري'
+            },
+            { 
+                question: 'ما هو الرمز الكيميائي للماء؟', 
+                answers: ['H₂O', 'CO₂', 'O₂'], 
+                yourAnswer: 'H₂O'
+            },
+            { 
+                question: 'من الذي رسم لوحة الموناليزا؟', 
+                answers: ['ليوناردو دافنشي', 'بابلو بيكاسو', 'فينسنت فان غوخ'], 
+                yourAnswer: 'ليوناردو دافنشي'
+            },
+            { 
+                question: 'ما هو الغاز الأكثر وفرة في الغلاف الجوي للأرض؟', 
+                answers: ['النيتروجين', 'الأكسجين', 'ثاني أكسيد الكربون'], 
+                yourAnswer: 'النيتروجين'
+            },
+            { 
+                question: 'كم عدد القارات الموجودة؟', 
+                answers: ['٧', '٦', '٨'], 
+                yourAnswer: '٧'
             }
-            // Add more questions as needed
         ];
 
-        // Function to get query parameters from URL
+        // Function to get query parameters from URL (not used in this case)
         function getQueryParameter(name) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(name);
         }
 
-        // Get the score from the URL and calculate passing criteria
-        const score = parseFloat(getQueryParameter('score')) || 0;
-        const passPercentage = 80; // Required percentage to pass
         const resultElement = document.getElementById('score-result');
         const questionsContainer = document.getElementById('questions-container');
 
         function displayResults() {
-            // Loop through questions and display them
+            // Loop through all 10 questions and display them
             questions.forEach((q, index) => {
                 const questionDiv = document.createElement('div');
                 questionDiv.classList.add('question');
