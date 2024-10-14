@@ -146,18 +146,11 @@
             }
         ];
 
-        // Function to calculate the correct number of answers and passing percentage
-        function calculateScore() {
-            let correctAnswers = 0;
-
-            // Loop through all the questions and count correct answers
-            questions.forEach(q => {
-                if (q.yourAnswer === q.correctAnswer) {
-                    correctAnswers++;
-                }
-            });
-
-            return correctAnswers;
+        // Function to get the score from the URL parameter
+        function getScoreFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const score = parseFloat(urlParams.get('score')) || 0; // Default to 0 if no score is found
+            return score;
         }
 
         function displayResults() {
@@ -171,8 +164,6 @@
             }
 
             console.log("Displaying results...");
-
-            let correctAnswers = calculateScore();
 
             // Loop through all 10 questions and display them
             questions.forEach((q, index) => {
@@ -200,11 +191,8 @@
                 questionsContainer.appendChild(questionDiv);
             });
 
-            // Calculate percentage score
-            const totalQuestions = questions.length;
-            const percentage = (correctAnswers / totalQuestions) * 100;
-
-            // Display the result and pass/fail status
+            // Get the score from the URL and display it
+            const percentage = getScoreFromURL();
             resultElement.innerHTML = `نتيجتك: ${percentage.toFixed(2)}%<br>`;
 
             // 80% pass rule
