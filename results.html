@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <style>
+        .result {
+            font-size: 24px;
+            margin: 20px;
+        }
+        .pass {
+            color: green;
+        }
+        .fail {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h1>Quiz Result</h1>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        // Function to get query parameters from URL
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Get the score from the URL
+        const score = getQueryParameter('score');
+        const resultElement = document.getElementById('result');
+
+        if (score >= 80) {
+            resultElement.innerHTML = `You passed! Score: ${score}%`;
+            resultElement.classList.add('pass');
+        } else {
+            resultElement.innerHTML = `You failed. Score: ${score}%`;
+            resultElement.classList.add('fail');
+        }
+    </script>
+</body>
+</html>
