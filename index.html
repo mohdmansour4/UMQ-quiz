@@ -44,88 +44,18 @@
                 <input type="radio" name="q1" value="wrong"> برلين<br>
             </div>
 
-            <!-- Question 2 -->
-            <div class="question">
-                <p>2. كم يساوي ٢ + ٢؟</p>
-                <input type="radio" name="q2" value="wrong"> ٣<br>
-                <input type="radio" name="q2" value="correct"> ٤<br>
-                <input type="radio" name="q2" value="wrong"> ٥<br>
-            </div>
-
-            <!-- Question 3 -->
-            <div class="question">
-                <p>3. من كتب "هاملت"؟</p>
-                <input type="radio" name="q3" value="correct"> وليم شكسبير<br>
-                <input type="radio" name="q3" value="wrong"> تشارلز ديكنز<br>
-                <input type="radio" name="q3" value="wrong"> مارك توين<br>
-            </div>
-
-            <!-- Question 4 -->
-            <div class="question">
-                <p>4. ما هي درجة غليان الماء بالدرجة المئوية؟</p>
-                <input type="radio" name="q4" value="correct"> ١٠٠°<br>
-                <input type="radio" name="q4" value="wrong"> ٩٠°<br>
-                <input type="radio" name="q4" value="wrong"> ١١٠°<br>
-            </div>
-
-            <!-- Question 5 -->
-            <div class="question">
-                <p>5. ما هو الجذر التربيعي للعدد ٩؟</p>
-                <input type="radio" name="q5" value="correct"> ٣<br>
-                <input type="radio" name="q5" value="wrong"> ٢<br>
-                <input type="radio" name="q5" value="wrong"> ٤<br>
-            </div>
-
-            <!-- Question 6 -->
-            <div class="question">
-                <p>6. ما هو أكبر كوكب في نظامنا الشمسي؟</p>
-                <input type="radio" name="q6" value="correct"> المشتري<br>
-                <input type="radio" name="q6" value="wrong"> المريخ<br>
-                <input type="radio" name="q6" value="wrong"> الأرض<br>
-            </div>
-
-            <!-- Question 7 -->
-            <div class="question">
-                <p>7. ما هو الرمز الكيميائي للماء؟</p>
-                <input type="radio" name="q7" value="correct"> H₂O<br>
-                <input type="radio" name="q7" value="wrong"> CO₂<br>
-                <input type="radio" name="q7" value="wrong"> O₂<br>
-            </div>
-
-            <!-- Question 8 -->
-            <div class="question">
-                <p>8. من الذي رسم لوحة الموناليزا؟</p>
-                <input type="radio" name="q8" value="correct"> ليوناردو دافنشي<br>
-                <input type="radio" name="q8" value="wrong"> بابلو بيكاسو<br>
-                <input type="radio" name="q8" value="wrong"> فينسنت فان غوخ<br>
-            </div>
-
-            <!-- Question 9 -->
-            <div class="question">
-                <p>9. ما هو الغاز الأكثر وفرة في الغلاف الجوي للأرض؟</p>
-                <input type="radio" name="q9" value="correct"> النيتروجين<br>
-                <input type="radio" name="q9" value="wrong"> الأكسجين<br>
-                <input type="radio" name="q9" value="wrong"> ثاني أكسيد الكربون<br>
-            </div>
-
-            <!-- Question 10 -->
-            <div class="question">
-                <p>10. كم عدد القارات الموجودة؟</p>
-                <input type="radio" name="q10" value="correct"> ٧<br>
-                <input type="radio" name="q10" value="wrong"> ٦<br>
-                <input type="radio" name="q10" value="wrong"> ٨<br>
-            </div>
+            <!-- Add more questions here -->
 
             <button onclick="submitQuiz()">إرسال</button>
         </div>
     </div>
 
     <script>
-        // This function will run when the page loads to reset any checked radio buttons
-        window.onload = function() {
+        // Reset the radio buttons when the page is shown (even on back navigation)
+        window.addEventListener('pageshow', function() {
             const radioButtons = document.querySelectorAll('input[type="radio"]');
             radioButtons.forEach(radio => radio.checked = false);
-        };
+        });
 
         function submitQuiz() {
             const correctAnswers = document.querySelectorAll('input[type="radio"][value="correct"]:checked').length;
