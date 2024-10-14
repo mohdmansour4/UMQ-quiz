@@ -161,6 +161,17 @@
         }
 
         function displayResults() {
+            const questionsContainer = document.getElementById('questions-container');
+            const resultElement = document.getElementById('score-result');
+            const nextChapterButton = document.getElementById('next-chapter');
+
+            if (!questionsContainer || !resultElement) {
+                console.log("DOM elements not found!");
+                return;
+            }
+
+            console.log("Displaying results...");
+
             let correctAnswers = calculateScore();
 
             // Loop through all 10 questions and display them
@@ -213,8 +224,10 @@
         }
 
         // Display the results once the page is loaded
-        window.onload = displayResults;
+        window.onload = function() {
+            console.log("Page loaded, running displayResults...");
+            displayResults();
+        };
     </script>
 </body>
 </html>
-
