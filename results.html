@@ -173,12 +173,12 @@
                 // Display the question
                 questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
 
-                // Display the answers with the chosen answer highlighted (no check on correctness)
+                // Display the answers with the chosen answer highlighted
                 q.answers.forEach(answer => {
                     const answerDiv = document.createElement('div');
                     answerDiv.classList.add('answer');
 
-                    // Highlight the chosen answer
+                    // Highlight the chosen answer no matter if it's correct or not
                     if (answer === q.yourAnswer) {
                         answerDiv.classList.add('selected');
                     }
