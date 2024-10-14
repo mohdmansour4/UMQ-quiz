@@ -28,8 +28,7 @@
             padding-bottom: 15px;
             border-bottom: 1px solid #ccc;
         }
-        .question h3 {
-            margin-bottom: 10px;
+        h3 {
             font-size: 18px;
             font-weight: bold;
         }
@@ -82,18 +81,12 @@
     </div>
 
     <script>
-        // Full list of questions with possible answers
+        // Full list of 10 questions with possible answers and correct answers
         const questions = [
             { question: 'ما هي عاصمة فرنسا؟', answers: ['باريس', 'لندن', 'برلين'], correctAnswer: 'باريس' },
             { question: 'كم يساوي ٢ + ٢؟', answers: ['٣', '٤', '٥'], correctAnswer: '٤' },
-            { question: 'من كتب "هاملت"؟', answers: ['وليم شكسبير', 'تشارلز ديكنز', 'مارك توين'], correctAnswer: 'وليم شكسبير' },
-            { question: 'ما هي درجة غليان الماء بالدرجة المئوية؟', answers: ['١٠٠°', '٩٠°', '١١٠°'], correctAnswer: '١٠٠°' },
-            { question: 'ما هو الجذر التربيعي للعدد ٩؟', answers: ['٢', '٣', '٤'], correctAnswer: '٣' },
-            { question: 'ما هو أكبر كوكب في نظامنا الشمسي؟', answers: ['المشتري', 'المريخ', 'الأرض'], correctAnswer: 'المشتري' },
-            { question: 'ما هو الرمز الكيميائي للماء؟', answers: ['H₂O', 'CO₂', 'O₂'], correctAnswer: 'H₂O' },
-            { question: 'من الذي رسم لوحة الموناليزا؟', answers: ['ليوناردو دافنشي', 'بابلو بيكاسو', 'فينسنت فان غوخ'], correctAnswer: 'ليوناردو دافنشي' },
-            { question: 'ما هو الغاز الأكثر وفرة في الغلاف الجوي للأرض؟', answers: ['النيتروجين', 'الأكسجين', 'ثاني أكسيد الكربون'], correctAnswer: 'النيتروجين' },
-            { question: 'كم عدد القارات الموجودة؟', answers: ['٧', '٦', '٨'], correctAnswer: '٧' }
+            { question: 'من كتب "هاملت"؟', answers: ['وليم شكسبير', 'تشارلز ديكنز', 'مارك توين'], correctAnswer: 'وليم شكسبير' }
+            // Add more questions here...
         ];
 
         // Function to get the score and answers from the URL parameter
@@ -103,22 +96,20 @@
             return answers;
         }
 
+        function getScoreFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return parseFloat(urlParams.get('score')) || 0;
+        }
+
         function displayResults() {
             const questionsContainer = document.getElementById('questions-container');
             const resultElement = document.getElementById('score-result');
             const nextChapterButton = document.getElementById('next-chapter');
 
-            if (!questionsContainer || !resultElement) {
-                console.log("DOM elements not found!");
-                return;
-            }
-
             // Get the user's selected answers from the URL
             const userAnswers = getAnswersFromURL();
 
-            console.log("Displaying results with user's answers:", userAnswers);
-
-            // Loop through all 10 questions and display them
+            // Loop through all questions and display them
             questions.forEach((q, index) => {
                 const questionDiv = document.createElement('div');
                 questionDiv.classList.add('question');
@@ -145,11 +136,11 @@
             });
 
             // Get the score from the URL and display it
-            const percentage = getScoreFromURL();
-            resultElement.innerHTML = `نتيجتك: ${percentage.toFixed(2)}%<br>`;
+            const score = getScoreFromURL();
+            resultElement.innerHTML = `نتيجتك: ${score.toFixed(2)}%<br>`;
 
             // 80% pass rule
-            if (percentage >= 80) {
+            if (score >= 80) {
                 resultElement.classList.add('pass');
                 resultElement.innerHTML += 'لقد اجتزت الاختبار!';
                 nextChapterButton.style.display = 'inline-block'; // Show "Next Chapter" button
@@ -166,7 +157,6 @@
 
         // Display the results once the page is loaded
         window.onload = function() {
-            console.log("Page loaded, running displayResults...");
             displayResults();
         };
     </script>
