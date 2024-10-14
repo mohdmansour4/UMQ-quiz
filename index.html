@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .quiz-container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .pass {
+            color: green;
+        }
+        .fail {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz</h1>
+        <div id="quiz">
+            <div class="question">
+                <p>1. What is the capital of France?</p>
+                <input type="radio" name="q1" value="correct"> Paris<br>
+                <input type="radio" name="q1" value="wrong"> London<br>
+                <input type="radio" name="q1" value="wrong"> Berlin<br>
+            </div>
+
+            <div class="question">
+                <p>2. What is 2 + 2?</p>
+                <input type="radio" name="q2" value="wrong"> 3<br>
+                <input type="radio" name="q2" value="correct"> 4<br>
+                <input type="radio" name="q2" value="wrong"> 5<br>
+            </div>
+
+            <div class="question">
+                <p>3. Who wrote "Hamlet"?</p>
+                <input type="radio" name="q3" value="correct"> William Shakespeare<br>
+                <input type="radio" name="q3" value="wrong"> Charles Dickens<br>
+                <input type="radio" name="q3" value="wrong"> Mark Twain<br>
+            </div>
+
+            <button onclick="submitQuiz()">Submit</button>
+        </div>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function submitQuiz() {
+            const correctAnswers = document.querySelectorAll('input[type="radio"][value="correct"]:checked').length;
+            const totalQuestions = document.querySelectorAll('.question').length;
+            const score = (correctAnswers / totalQuestions) * 100;
+            const resultElement = document.getElementById('result');
+
+            if (score >= 80) {
+                resultElement.innerHTML = `You passed! Score: ${score.toFixed(2)}%`;
+                resultElement.classList.add('pass');
+                resultElement.classList.remove('fail');
+            } else {
+                resultElement.innerHTML = `You failed. Score: ${score.toFixed(2)}%`;
+                resultElement.classList.add('fail');
+                resultElement.classList.remove('pass');
+            }
+        }
+    </script>
+</body>
+</html>
