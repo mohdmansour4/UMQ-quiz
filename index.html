@@ -74,7 +74,61 @@
                 <label><input type="radio" name="q3" value="مارك توين"> مارك توين</label>
             </div>
 
-            <!-- Add more questions as needed -->
+            <!-- Question 4 -->
+            <div class="question">
+                <h3>4. ما هي درجة غليان الماء بالدرجة المئوية؟</h3>
+                <label><input type="radio" name="q4" value="١٠٠°"> ١٠٠°</label>
+                <label><input type="radio" name="q4" value="٩٠°"> ٩٠°</label>
+                <label><input type="radio" name="q4" value="١١٠°"> ١١٠°</label>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <h3>5. ما هو الجذر التربيعي للعدد ٩؟</h3>
+                <label><input type="radio" name="q5" value="٢"> ٢</label>
+                <label><input type="radio" name="q5" value="٣"> ٣</label>
+                <label><input type="radio" name="q5" value="٤"> ٤</label>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <h3>6. ما هو أكبر كوكب في نظامنا الشمسي؟</h3>
+                <label><input type="radio" name="q6" value="المشتري"> المشتري</label>
+                <label><input type="radio" name="q6" value="المريخ"> المريخ</label>
+                <label><input type="radio" name="q6" value="الأرض"> الأرض</label>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <h3>7. ما هو الرمز الكيميائي للماء؟</h3>
+                <label><input type="radio" name="q7" value="H₂O"> H₂O</label>
+                <label><input type="radio" name="q7" value="CO₂"> CO₂</label>
+                <label><input type="radio" name="q7" value="O₂"> O₂</label>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <h3>8. من الذي رسم لوحة الموناليزا؟</h3>
+                <label><input type="radio" name="q8" value="ليوناردو دافنشي"> ليوناردو دافنشي</label>
+                <label><input type="radio" name="q8" value="بابلو بيكاسو"> بابلو بيكاسو</label>
+                <label><input type="radio" name="q8" value="فينسنت فان غوخ"> فينسنت فان غوخ</label>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <h3>9. ما هو الغاز الأكثر وفرة في الغلاف الجوي للأرض؟</h3>
+                <label><input type="radio" name="q9" value="النيتروجين"> النيتروجين</label>
+                <label><input type="radio" name="q9" value="الأكسجين"> الأكسجين</label>
+                <label><input type="radio" name="q9" value="ثاني أكسيد الكربون"> ثاني أكسيد الكربون</label>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <h3>10. كم عدد القارات الموجودة؟</h3>
+                <label><input type="radio" name="q10" value="٧"> ٧</label>
+                <label><input type="radio" name="q10" value="٦"> ٦</label>
+                <label><input type="radio" name="q10" value="٨"> ٨</label>
+            </div>
 
             <button type="submit">إرسال الإجابات</button>
         </form>
@@ -92,14 +146,37 @@
                 answers[key] = value;
             });
 
+            // Calculate score based on answers (for demo, we're assuming all answers are correct for simplicity)
+            let correctAnswers = 0;
+            const correctAnswerKey = {
+                q1: 'باريس',
+                q2: '٤',
+                q3: 'وليم شكسبير',
+                q4: '١٠٠°',
+                q5: '٣',
+                q6: 'المشتري',
+                q7: 'H₂O',
+                q8: 'ليوناردو دافنشي',
+                q9: 'النيتروجين',
+                q10: '٧'
+            };
+
+            // Loop through the answers and calculate score
+            for (let key in answers) {
+                if (answers[key] === correctAnswerKey[key]) {
+                    correctAnswers++;
+                }
+            }
+
+            // Calculate the percentage score
+            const totalQuestions = 10;
+            const score = (correctAnswers / totalQuestions) * 100;
+
             // Convert the answers to a URL-encoded string to pass via URL
             const encodedAnswers = encodeURIComponent(JSON.stringify(answers));
 
-            // Assuming the score is calculated dynamically, but hardcoded here as an example (e.g., 90%)
-            const score = 90.00;
-
             // Redirect to the results page with the answers and score
-            window.location.href = `results.html?answers=${encodedAnswers}&score=${score}`;
+            window.location.href = `results.html?answers=${encodedAnswers}&score=${score.toFixed(2)}`;
         }
 
         // Reset the radio buttons when the page is reloaded or user goes back
