@@ -6,7 +6,7 @@
     <title>نتيجة الاختبار</title>
     <style>
         body {
-            direction: rtl; /* Set the layout from right to left */
+            direction: rtl; /* Right to left layout */
             font-family: Arial, sans-serif;
             margin: 20px;
             background-color: #f9f9f9;
@@ -39,13 +39,8 @@
             border-radius: 5px;
             display: block;
         }
-        .answer.incorrect {
-            background-color: #ffe0e0;
-            color: #d9534f;
-        }
-        .answer.correct {
-            background-color: #e0ffe0;
-            color: #5cb85c;
+        .answer.selected {
+            background-color: #d9edf7; /* Light blue for selected answer */
         }
         .result-summary {
             font-size: 18px;
@@ -70,7 +65,7 @@
 <body>
     <div class="result-container">
         <div class="result-header">
-            <h1>نتيجة الاختبار</h1>
+            <h1>ملخص الإجابات</h1>
             <div id="score-result" class="result-summary"></div>
         </div>
 
@@ -85,25 +80,20 @@
         const questions = [
             { 
                 question: 'ما هي عاصمة فرنسا؟', 
-                correctAnswer: 'باريس', 
                 answers: ['باريس', 'لندن', 'برلين'], 
-                yourAnswer: 'لندن', // Example of incorrect answer
-                correct: false 
+                yourAnswer: 'لندن' // Example of chosen answer
             },
             { 
                 question: 'كم يساوي ٢ + ٢؟', 
-                correctAnswer: '٤', 
                 answers: ['٣', '٤', '٥'], 
-                yourAnswer: '٤', // Correct answer
-                correct: true 
+                yourAnswer: '٤' // Chosen answer
             },
             { 
                 question: 'من كتب "هاملت"؟', 
-                correctAnswer: 'وليم شكسبير', 
                 answers: ['وليم شكسبير', 'تشارلز ديكنز', 'مارك توين'], 
-                yourAnswer: 'تشارلز ديكنز', // Example of incorrect answer
-                correct: false 
+                yourAnswer: 'تشارلز ديكنز' // Example of chosen answer
             }
+            // Add more questions as needed
         ];
 
         // Function to get query parameters from URL
@@ -119,8 +109,6 @@
         const questionsContainer = document.getElementById('questions-container');
 
         function displayResults() {
-            let correctAnswers = 0;
-
             // Loop through questions and display them
             questions.forEach((q, index) => {
                 const questionDiv = document.createElement('div');
@@ -129,17 +117,14 @@
                 // Display the question
                 questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
 
-                // Display the answers
+                // Display the answers with the chosen answer highlighted
                 q.answers.forEach(answer => {
                     const answerDiv = document.createElement('div');
                     answerDiv.classList.add('answer');
 
-                    // Highlight if the answer is incorrect or correct
-                    if (answer === q.yourAnswer && !q.correct) {
-                        answerDiv.classList.add('incorrect');
-                    }
-                    if (answer === q.correctAnswer) {
-                        answerDiv.classList.add('correct');
+                    // Highlight the chosen answer
+                    if (answer === q.yourAnswer) {
+                        answerDiv.classList.add('selected');
                     }
 
                     answerDiv.innerText = answer;
@@ -148,27 +133,10 @@
 
                 // Append the question and answers to the container
                 questionsContainer.appendChild(questionDiv);
-
-                if (q.correct) {
-                    correctAnswers++;
-                }
             });
 
-            // Calculate score percentage
-            const totalQuestions = questions.length;
-            const percentage = (correctAnswers / totalQuestions) * 100;
-
-            // Display result and pass/fail status
-            resultElement.innerHTML = `
-                نتيجتك: ${percentage.toFixed(2)}%<br>
-                تحتاج إلى ${passPercentage}% لاجتياز الاختبار.
-            `;
-
-            if (percentage >= passPercentage) {
-                resultElement.innerHTML += '<br>لقد اجتزت الاختبار!';
-            } else {
-                resultElement.innerHTML += '<br>للأسف لم تجتز الاختبار.';
-            }
+            // Display score result without showing whether the answers were correct
+            resultElement.innerHTML = `لقد أجبت على ${questions.length} أسئلة.`;
         }
 
         function goToNextChapter() {
