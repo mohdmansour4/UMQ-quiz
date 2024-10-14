@@ -3,33 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نتيجة الاختبار</title>
+    <title>الاختبار</title>
     <style>
         body {
-            direction: rtl; /* Set the layout from right to left */
-            text-align: center;
+            direction: rtl; /* Set the direction to right-to-left */
+            text-align: center; /* Center the text */
             font-family: Arial, sans-serif;
             margin: 20px;
         }
-        .result {
-            font-size: 24px;
-            margin: 20px;
+        .quiz-container {
+            max-width: 600px;
+            margin: auto;
         }
-        .pass {
-            color: green;
+        .question {
+            margin-bottom: 20px;
+            text-align: right; /* Align text to the right for readability */
         }
-        .fail {
-            color: red;
+        label {
+            display: block; /* Make sure each radio button and its label are on a new line */
+            margin: 5px 0;
         }
-        .incorrect {
-            color: red;
-        }
-        .correct {
-            color: green;
-        }
-        #next-chapter {
-            display: none; /* Initially hidden */
-            margin-top: 20px;
+        button {
             padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
@@ -37,120 +31,142 @@
             cursor: pointer;
             font-size: 18px;
         }
-        #next-chapter:hover {
+        button:hover {
             background-color: #45a049;
-        }
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="result-container">
-        <h1>نتيجة الاختبار</h1>
-        <div id="score-result" class="result"></div>
-        
-        <!-- Incorrect answers table -->
-        <h2>إجابات غير صحيحة</h2>
-        <table id="incorrect-answers-table">
-            <thead>
-                <tr>
-                    <th>السؤال</th>
-                    <th>إجابتك</th>
-                    <th>الإجابة الصحيحة</th>
-                </tr>
-            </thead>
-            <tbody id="incorrect-answers-body">
-                <!-- Incorrect answers will be inserted here -->
-            </tbody>
-        </table>
+    <div class="quiz-container">
+        <h1>الاختبار</h1>
+        <div id="quiz">
+            <!-- Question 1 -->
+            <div class="question">
+                <p>1. ما هي عاصمة فرنسا؟</p>
+                <label><input type="radio" name="q1" value="correct"> باريس</label>
+                <label><input type="radio" name="q1" value="wrong"> لندن</label>
+                <label><input type="radio" name="q1" value="wrong"> برلين</label>
+            </div>
 
-        <button id="next-chapter" onclick="goToNextChapter()">الانتقال إلى الفصل التالي</button>
+            <!-- Question 2 -->
+            <div class="question">
+                <p>2. كم يساوي ٢ + ٢؟</p>
+                <label><input type="radio" name="q2" value="wrong"> ٣</label>
+                <label><input type="radio" name="q2" value="correct"> ٤</label>
+                <label><input type="radio" name="q2" value="wrong"> ٥</label>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <p>3. من كتب "هاملت"؟</p>
+                <label><input type="radio" name="q3" value="correct"> وليم شكسبير</label>
+                <label><input type="radio" name="q3" value="wrong"> تشارلز ديكنز</label>
+                <label><input type="radio" name="q3" value="wrong"> مارك توين</label>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <p>4. ما هي درجة غليان الماء بالدرجة المئوية؟</p>
+                <label><input type="radio" name="q4" value="correct"> ١٠٠°</label>
+                <label><input type="radio" name="q4" value="wrong"> ٩٠°</label>
+                <label><input type="radio" name="q4" value="wrong"> ١١٠°</label>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <p>5. ما هو الجذر التربيعي للعدد ٩؟</p>
+                <label><input type="radio" name="q5" value="correct"> ٣</label>
+                <label><input type="radio" name="q5" value="wrong"> ٢</label>
+                <label><input type="radio" name="q5" value="wrong"> ٤</label>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <p>6. ما هو أكبر كوكب في نظامنا الشمسي؟</p>
+                <label><input type="radio" name="q6" value="correct"> المشتري</label>
+                <label><input type="radio" name="q6" value="wrong"> المريخ</label>
+                <label><input type="radio" name="q6" value="wrong"> الأرض</label>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <p>7. ما هو الرمز الكيميائي للماء؟</p>
+                <label><input type="radio" name="q7" value="correct"> H₂O</label>
+                <label><input type="radio" name="q7" value="wrong"> CO₂</label>
+                <label><input type="radio" name="q7" value="wrong"> O₂</label>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <p>8. من الذي رسم لوحة الموناليزا؟</p>
+                <label><input type="radio" name="q8" value="correct"> ليوناردو دافنشي</label>
+                <label><input type="radio" name="q8" value="wrong"> بابلو بيكاسو</label>
+                <label><input type="radio" name="q8" value="wrong"> فينسنت فان غوخ</label>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <p>9. ما هو الغاز الأكثر وفرة في الغلاف الجوي للأرض؟</p>
+                <label><input type="radio" name="q9" value="correct"> النيتروجين</label>
+                <label><input type="radio" name="q9" value="wrong"> الأكسجين</label>
+                <label><input type="radio" name="q9" value="wrong"> ثاني أكسيد الكربون</label>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <p>10. كم عدد القارات الموجودة؟</p>
+                <label><input type="radio" name="q10" value="correct"> ٧</label>
+                <label><input type="radio" name="q10" value="wrong"> ٦</label>
+                <label><input type="radio" name="q10" value="wrong"> ٨</label>
+            </div>
+
+            <button onclick="submitQuiz()">إرسال</button>
+        </div>
     </div>
 
     <script>
-        // Sample questions and answers
-        const questions = [
-            { question: 'ما هي عاصمة فرنسا؟', correctAnswer: 'باريس', yourAnswer: '', correct: false },
-            { question: 'كم يساوي ٢ + ٢؟', correctAnswer: '٤', yourAnswer: '', correct: false },
-            { question: 'من كتب "هاملت"؟', correctAnswer: 'وليم شكسبير', yourAnswer: '', correct: false },
-            // Add more questions as needed
-        ];
-
-        // Function to get query parameters from URL
-        function getQueryParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-
-        // Get the score from the URL and calculate passing criteria
-        const score = parseFloat(getQueryParameter('score'));
-        const passPercentage = 80; // Required percentage to pass
-        const resultElement = document.getElementById('score-result');
-        const nextChapterButton = document.getElementById('next-chapter');
-        const incorrectAnswersTable = document.getElementById('incorrect-answers-body');
-
-        function displayResults() {
-            let correctAnswers = 0;
-
-            // Loop through questions and check answers (this should be generated during quiz submission)
-            questions.forEach((q, index) => {
-                // For demonstration purposes, we're assigning random answers here
-                // Replace this with actual answers received from the quiz page
-                q.yourAnswer = Math.random() > 0.5 ? q.correctAnswer : 'إجابة خاطئة ' + (index + 1);
-
-                // Check if the answer is correct
-                q.correct = q.yourAnswer === q.correctAnswer;
-                if (q.correct) {
-                    correctAnswers++;
-                } else {
-                    // Insert incorrect answers into the table
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${q.question}</td>
-                        <td class="incorrect">${q.yourAnswer}</td>
-                        <td class="correct">${q.correctAnswer}</td>
-                    `;
-                    incorrectAnswersTable.appendChild(row);
-                }
-            });
-
-            // Calculate score percentage
-            const totalQuestions = questions.length;
-            const percentage = (correctAnswers / totalQuestions) * 100;
-
-            // Display result and pass/fail status
-            resultElement.innerHTML = `
-                نتيجتك: ${percentage.toFixed(2)}%<br>
-                تحتاج إلى ${passPercentage}% لاجتياز الاختبار.
-            `;
-
-            if (percentage >= passPercentage) {
-                resultElement.classList.add('pass');
-                resultElement.innerHTML += '<br>لقد اجتزت الاختبار!';
-                nextChapterButton.style.display = 'inline-block'; // Show "Next Chapter" button
-            } else {
-                resultElement.classList.add('fail');
-                resultElement.innerHTML += '<br>للأسف لم تجتز الاختبار.';
+        // This function will run when the page loads from cache (when pressing back button)
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                resetRadioButtons();
             }
+            shuffleAnswers();
+        });
+
+        // Function to reset radio buttons when the page is loaded from cache
+        function resetRadioButtons() {
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.checked = false);
         }
 
-        function goToNextChapter() {
-            // Replace this URL with the actual link to the next chapter
-            window.location.href = "https://yourwebsite.com/next-chapter";
+        // Function to shuffle answers for each question
+        function shuffleAnswers() {
+            const questions = document.querySelectorAll('.question');
+            questions.forEach(question => {
+                const answers = Array.from(question.querySelectorAll('label'));
+                
+                // Shuffle the answers
+                for (let i = answers.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [answers[i], answers[j]] = [answers[j], answers[i]];
+                }
+                
+                // Append the shuffled answers back to the DOM
+                answers.forEach(answer => question.appendChild(answer));
+            });
         }
 
-        // Display the results once the page is loaded
-        window.onload = displayResults;
+        function submitQuiz() {
+            const correctAnswers = document.querySelectorAll('input[type="radio"][value="correct"]:checked').length;
+            const totalQuestions = document.querySelectorAll('.question').length;
+            const score = (correctAnswers / totalQuestions) * 100;
+
+            // Redirect to the results page with the score as a query parameter
+            window.location.href = `results.html?score=${score.toFixed(2)}`;
+        }
+
+        // Shuffle the answers when the page is loaded
+        window.onload = shuffleAnswers;
     </script>
 </body>
 </html>
