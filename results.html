@@ -146,14 +146,22 @@
             }
         ];
 
-        // Get the score from the URL and calculate passing criteria
-        const passPercentage = 80; // Required percentage to pass
-        const resultElement = document.getElementById('score-result');
-        const questionsContainer = document.getElementById('questions-container');
-        const nextChapterButton = document.getElementById('next-chapter');
+        // Function to calculate the correct number of answers and passing percentage
+        function calculateScore() {
+            let correctAnswers = 0;
+
+            // Loop through all the questions and count correct answers
+            questions.forEach(q => {
+                if (q.yourAnswer === q.correctAnswer) {
+                    correctAnswers++;
+                }
+            });
+
+            return correctAnswers;
+        }
 
         function displayResults() {
-            let correctAnswers = 0;
+            let correctAnswers = calculateScore();
 
             // Loop through all 10 questions and display them
             questions.forEach((q, index) => {
@@ -163,7 +171,7 @@
                 // Display the question
                 questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
 
-                // Display the answers with the chosen answer highlighted
+                // Display the answers with the chosen answer highlighted (no check on correctness)
                 q.answers.forEach(answer => {
                     const answerDiv = document.createElement('div');
                     answerDiv.classList.add('answer');
@@ -179,21 +187,17 @@
 
                 // Append the question and answers to the container
                 questionsContainer.appendChild(questionDiv);
-
-                // Check if the answer is correct
-                if (q.yourAnswer === q.correctAnswer) {
-                    correctAnswers++;
-                }
             });
 
-            // Calculate score percentage
+            // Calculate percentage score
             const totalQuestions = questions.length;
             const percentage = (correctAnswers / totalQuestions) * 100;
 
-            // Display result and pass/fail status
+            // Display the result and pass/fail status
             resultElement.innerHTML = `نتيجتك: ${percentage.toFixed(2)}%<br>`;
 
-            if (percentage >= passPercentage) {
+            // 80% pass rule
+            if (percentage >= 80) {
                 resultElement.classList.add('pass');
                 resultElement.innerHTML += 'لقد اجتزت الاختبار!';
                 nextChapterButton.style.display = 'inline-block'; // Show "Next Chapter" button
@@ -213,3 +217,4 @@
     </script>
 </body>
 </html>
+
