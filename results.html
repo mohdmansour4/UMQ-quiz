@@ -82,75 +82,25 @@
     </div>
 
     <script>
-        // Full list of 10 questions with possible answers and the user's selected answer
+        // Full list of questions with possible answers
         const questions = [
-            { 
-                question: 'ما هي عاصمة فرنسا؟', 
-                answers: ['باريس', 'لندن', 'برلين'], 
-                yourAnswer: 'لندن',
-                correctAnswer: 'باريس'
-            },
-            { 
-                question: 'كم يساوي ٢ + ٢؟', 
-                answers: ['٣', '٤', '٥'], 
-                yourAnswer: '٤',
-                correctAnswer: '٤'
-            },
-            { 
-                question: 'من كتب "هاملت"؟', 
-                answers: ['وليم شكسبير', 'تشارلز ديكنز', 'مارك توين'], 
-                yourAnswer: 'تشارلز ديكنز',
-                correctAnswer: 'وليم شكسبير'
-            },
-            { 
-                question: 'ما هي درجة غليان الماء بالدرجة المئوية؟', 
-                answers: ['١٠٠°', '٩٠°', '١١٠°'], 
-                yourAnswer: '٩٠°',
-                correctAnswer: '١٠٠°'
-            },
-            { 
-                question: 'ما هو الجذر التربيعي للعدد ٩؟', 
-                answers: ['٢', '٣', '٤'], 
-                yourAnswer: '٣',
-                correctAnswer: '٣'
-            },
-            { 
-                question: 'ما هو أكبر كوكب في نظامنا الشمسي؟', 
-                answers: ['المشتري', 'المريخ', 'الأرض'], 
-                yourAnswer: 'المشتري',
-                correctAnswer: 'المشتري'
-            },
-            { 
-                question: 'ما هو الرمز الكيميائي للماء؟', 
-                answers: ['H₂O', 'CO₂', 'O₂'], 
-                yourAnswer: 'H₂O',
-                correctAnswer: 'H₂O'
-            },
-            { 
-                question: 'من الذي رسم لوحة الموناليزا؟', 
-                answers: ['ليوناردو دافنشي', 'بابلو بيكاسو', 'فينسنت فان غوخ'], 
-                yourAnswer: 'ليوناردو دافنشي',
-                correctAnswer: 'ليوناردو دافنشي'
-            },
-            { 
-                question: 'ما هو الغاز الأكثر وفرة في الغلاف الجوي للأرض؟', 
-                answers: ['النيتروجين', 'الأكسجين', 'ثاني أكسيد الكربون'], 
-                yourAnswer: 'النيتروجين',
-                correctAnswer: 'النيتروجين'
-            },
-            { 
-                question: 'كم عدد القارات الموجودة؟', 
-                answers: ['٧', '٦', '٨'], 
-                yourAnswer: '٧',
-                correctAnswer: '٧'
-            }
+            { question: 'ما هي عاصمة فرنسا؟', answers: ['باريس', 'لندن', 'برلين'], correctAnswer: 'باريس' },
+            { question: 'كم يساوي ٢ + ٢؟', answers: ['٣', '٤', '٥'], correctAnswer: '٤' },
+            { question: 'من كتب "هاملت"؟', answers: ['وليم شكسبير', 'تشارلز ديكنز', 'مارك توين'], correctAnswer: 'وليم شكسبير' },
+            { question: 'ما هي درجة غليان الماء بالدرجة المئوية؟', answers: ['١٠٠°', '٩٠°', '١١٠°'], correctAnswer: '١٠٠°' },
+            { question: 'ما هو الجذر التربيعي للعدد ٩؟', answers: ['٢', '٣', '٤'], correctAnswer: '٣' },
+            { question: 'ما هو أكبر كوكب في نظامنا الشمسي؟', answers: ['المشتري', 'المريخ', 'الأرض'], correctAnswer: 'المشتري' },
+            { question: 'ما هو الرمز الكيميائي للماء؟', answers: ['H₂O', 'CO₂', 'O₂'], correctAnswer: 'H₂O' },
+            { question: 'من الذي رسم لوحة الموناليزا؟', answers: ['ليوناردو دافنشي', 'بابلو بيكاسو', 'فينسنت فان غوخ'], correctAnswer: 'ليوناردو دافنشي' },
+            { question: 'ما هو الغاز الأكثر وفرة في الغلاف الجوي للأرض؟', answers: ['النيتروجين', 'الأكسجين', 'ثاني أكسيد الكربون'], correctAnswer: 'النيتروجين' },
+            { question: 'كم عدد القارات الموجودة؟', answers: ['٧', '٦', '٨'], correctAnswer: '٧' }
         ];
 
-        // Function to get the score from the URL parameter
-        function getScoreFromURL() {
+        // Function to get the score and answers from the URL parameter
+        function getAnswersFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
-            const score = parseFloat(urlParams.get('score')) || 0; // Default to 0 if no score is found
-            return score;
+            const answers = JSON.parse(decodeURIComponent(urlParams.get('answers')));
+            return answers;
         }
 
         function displayResults() {
@@ -163,7 +113,10 @@
                 return;
             }
 
-            console.log("Displaying results...");
+            // Get the user's selected answers from the URL
+            const userAnswers = getAnswersFromURL();
+
+            console.log("Displaying results with user's answers:", userAnswers);
 
             // Loop through all 10 questions and display them
             questions.forEach((q, index) => {
@@ -173,13 +126,13 @@
                 // Display the question
                 questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
 
-                // Display the answers with the chosen answer highlighted
+                // Display the answers with the user's selected answer highlighted
                 q.answers.forEach(answer => {
                     const answerDiv = document.createElement('div');
                     answerDiv.classList.add('answer');
 
-                    // Highlight the chosen answer no matter if it's correct or not
-                    if (answer === q.yourAnswer) {
+                    // Highlight the user's selected answer
+                    if (answer === userAnswers[`q${index + 1}`]) {
                         answerDiv.classList.add('selected');
                     }
 
