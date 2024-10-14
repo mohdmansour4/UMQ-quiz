@@ -47,6 +47,12 @@
             text-align: center;
             margin: 20px 0;
         }
+        .pass {
+            color: green;
+        }
+        .fail {
+            color: red;
+        }
         button {
             padding: 10px 20px;
             background-color: #4CAF50;
@@ -72,7 +78,7 @@
         <!-- Questions and answers will be displayed here -->
         <div id="questions-container"></div>
 
-        <button id="next-chapter" onclick="goToNextChapter()">الانتقال إلى الفصل التالي</button>
+        <button id="next-chapter" onclick="goToNextChapter()" style="display:none;">الانتقال إلى الفصل التالي</button>
     </div>
 
     <script>
@@ -81,65 +87,80 @@
             { 
                 question: 'ما هي عاصمة فرنسا؟', 
                 answers: ['باريس', 'لندن', 'برلين'], 
-                yourAnswer: 'لندن'
+                yourAnswer: 'لندن',
+                correctAnswer: 'باريس'
             },
             { 
                 question: 'كم يساوي ٢ + ٢؟', 
                 answers: ['٣', '٤', '٥'], 
-                yourAnswer: '٤'
+                yourAnswer: '٤',
+                correctAnswer: '٤'
             },
             { 
                 question: 'من كتب "هاملت"؟', 
                 answers: ['وليم شكسبير', 'تشارلز ديكنز', 'مارك توين'], 
-                yourAnswer: 'تشارلز ديكنز'
+                yourAnswer: 'تشارلز ديكنز',
+                correctAnswer: 'وليم شكسبير'
             },
             { 
                 question: 'ما هي درجة غليان الماء بالدرجة المئوية؟', 
                 answers: ['١٠٠°', '٩٠°', '١١٠°'], 
-                yourAnswer: '٩٠°'
+                yourAnswer: '٩٠°',
+                correctAnswer: '١٠٠°'
             },
             { 
                 question: 'ما هو الجذر التربيعي للعدد ٩؟', 
                 answers: ['٢', '٣', '٤'], 
-                yourAnswer: '٣'
+                yourAnswer: '٣',
+                correctAnswer: '٣'
             },
             { 
                 question: 'ما هو أكبر كوكب في نظامنا الشمسي؟', 
                 answers: ['المشتري', 'المريخ', 'الأرض'], 
-                yourAnswer: 'المشتري'
+                yourAnswer: 'المشتري',
+                correctAnswer: 'المشتري'
             },
             { 
                 question: 'ما هو الرمز الكيميائي للماء؟', 
                 answers: ['H₂O', 'CO₂', 'O₂'], 
-                yourAnswer: 'H₂O'
+                yourAnswer: 'H₂O',
+                correctAnswer: 'H₂O'
             },
             { 
                 question: 'من الذي رسم لوحة الموناليزا؟', 
                 answers: ['ليوناردو دافنشي', 'بابلو بيكاسو', 'فينسنت فان غوخ'], 
-                yourAnswer: 'ليوناردو دافنشي'
+                yourAnswer: 'ليوناردو دافنشي',
+                correctAnswer: 'ليوناردو دافنشي'
             },
             { 
                 question: 'ما هو الغاز الأكثر وفرة في الغلاف الجوي للأرض؟', 
                 answers: ['النيتروجين', 'الأكسجين', 'ثاني أكسيد الكربون'], 
-                yourAnswer: 'النيتروجين'
+                yourAnswer: 'النيتروجين',
+                correctAnswer: 'النيتروجين'
             },
             { 
                 question: 'كم عدد القارات الموجودة؟', 
                 answers: ['٧', '٦', '٨'], 
-                yourAnswer: '٧'
+                yourAnswer: '٧',
+                correctAnswer: '٧'
             }
         ];
 
-        // Function to get query parameters from URL (not used in this case)
+        // Function to get query parameters from URL
         function getQueryParameter(name) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(name);
         }
 
+        // Get the score from the URL and calculate passing criteria
+        const passPercentage = 80; // Required percentage to pass
         const resultElement = document.getElementById('score-result');
         const questionsContainer = document.getElementById('questions-container');
+        const nextChapterButton = document.getElementById('next-chapter');
 
         function displayResults() {
+            let correctAnswers = 0;
+
             // Loop through all 10 questions and display them
             questions.forEach((q, index) => {
                 const questionDiv = document.createElement('div');
@@ -164,10 +185,28 @@
 
                 // Append the question and answers to the container
                 questionsContainer.appendChild(questionDiv);
+
+                // Check if the answer is correct
+                if (q.yourAnswer === q.correctAnswer) {
+                    correctAnswers++;
+                }
             });
 
-            // Display score result without showing whether the answers were correct
-            resultElement.innerHTML = `لقد أجبت على ${questions.length} أسئلة.`;
+            // Calculate score percentage
+            const totalQuestions = questions.length;
+            const percentage = (correctAnswers / totalQuestions) * 100;
+
+            // Display result and pass/fail status
+            resultElement.innerHTML = `نتيجتك: ${percentage.toFixed(2)}%<br>`;
+
+            if (percentage >= passPercentage) {
+                resultElement.classList.add('pass');
+                resultElement.innerHTML += 'لقد اجتزت الاختبار!';
+                nextChapterButton.style.display = 'inline-block'; // Show "Next Chapter" button
+            } else {
+                resultElement.classList.add('fail');
+                resultElement.innerHTML += 'للأسف لم تجتز الاختبار. تحتاج إلى 80% للاجتياز.';
+            }
         }
 
         function goToNextChapter() {
