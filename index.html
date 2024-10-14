@@ -4,29 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .quiz-container {
-            max-width: 600px;
-            margin: auto;
-        }
-        .question {
-            margin-bottom: 20px;
-        }
-        .result {
-            font-size: 20px;
-            margin-top: 20px;
-        }
-        .pass {
-            color: green;
-        }
-        .fail {
-            color: red;
-        }
-    </style>
 </head>
 <body>
     <div class="quiz-container">
@@ -55,7 +32,6 @@
 
             <button onclick="submitQuiz()">Submit</button>
         </div>
-        <div id="result" class="result"></div>
     </div>
 
     <script>
@@ -63,17 +39,9 @@
             const correctAnswers = document.querySelectorAll('input[type="radio"][value="correct"]:checked').length;
             const totalQuestions = document.querySelectorAll('.question').length;
             const score = (correctAnswers / totalQuestions) * 100;
-            const resultElement = document.getElementById('result');
 
-            if (score >= 80) {
-                resultElement.innerHTML = `You passed! Score: ${score.toFixed(2)}%`;
-                resultElement.classList.add('pass');
-                resultElement.classList.remove('fail');
-            } else {
-                resultElement.innerHTML = `You failed. Score: ${score.toFixed(2)}%`;
-                resultElement.classList.add('fail');
-                resultElement.classList.remove('pass');
-            }
+            // Redirect to the results page with the score as a query parameter
+            window.location.href = `results.html?score=${score.toFixed(2)}`;
         }
     </script>
 </body>
