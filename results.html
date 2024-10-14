@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Results</title>
+    <title>نتيجة الاختبار</title>
     <style>
+        body {
+            direction: rtl; /* Set the layout from right to left */
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
         .result {
             font-size: 24px;
             margin: 20px;
@@ -15,12 +21,27 @@
         .fail {
             color: red;
         }
+        #next-chapter {
+            display: none; /* Initially hidden */
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        #next-chapter:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
     <div class="result-container">
-        <h1>Quiz Result</h1>
+        <h1>نتيجة الاختبار</h1>
         <div id="result" class="result"></div>
+        <!-- This button will appear only if the user passes the quiz -->
+        <button id="next-chapter" onclick="goToNextChapter()">الانتقال إلى الفصل التالي</button>
     </div>
 
     <script>
@@ -33,13 +54,23 @@
         // Get the score from the URL
         const score = getQueryParameter('score');
         const resultElement = document.getElementById('result');
+        const nextChapterButton = document.getElementById('next-chapter');
 
+        // Display the result based on the score
         if (score >= 80) {
-            resultElement.innerHTML = `You passed! Score: ${score}%`;
+            resultElement.innerHTML = `لقد اجتزت الاختبار! نتيجتك: ${score}%`;
             resultElement.classList.add('pass');
+            // Show the "Next Chapter" button if the score is 80% or higher
+            nextChapterButton.style.display = 'inline-block';
         } else {
-            resultElement.innerHTML = `You failed. Score: ${score}%`;
+            resultElement.innerHTML = `للأسف لم تجتز الاختبار. نتيجتك: ${score}%`;
             resultElement.classList.add('fail');
+        }
+
+        // Function to navigate to the next chapter
+        function goToNextChapter() {
+            // Replace this URL with the actual link to the next chapter
+            window.location.href = "https://yourwebsite.com/next-chapter";
         }
     </script>
 </body>
