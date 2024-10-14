@@ -7,65 +7,75 @@
     <style>
         body {
             direction: rtl; /* Set the layout from right to left */
-            text-align: center;
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f9f9f9;
         }
-        .result {
-            font-size: 24px;
-            margin: 20px;
+        .result-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
-        .pass {
-            color: green;
+        .result-header {
+            text-align: center;
+            margin-bottom: 20px;
         }
-        .fail {
-            color: red;
+        .question {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
         }
-        .incorrect-answer {
-            color: red;
+        .question h3 {
+            margin-bottom: 10px;
             font-size: 18px;
-            margin: 10px 0;
+            font-weight: bold;
         }
-        #next-chapter {
-            display: none; /* Initially hidden */
-            margin-top: 20px;
+        .answer {
+            margin: 5px 0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: block;
+        }
+        .answer.incorrect {
+            background-color: #ffe0e0;
+            color: #d9534f;
+        }
+        .answer.correct {
+            background-color: #e0ffe0;
+            color: #5cb85c;
+        }
+        .result-summary {
+            font-size: 18px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        button {
             padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
             border: none;
             cursor: pointer;
             font-size: 18px;
+            display: block;
+            margin: 0 auto;
         }
-        #next-chapter:hover {
+        button:hover {
             background-color: #45a049;
-        }
-        .result-container {
-            background-color: #f0f0f0; /* Light background */
-            border-radius: 10px;
-            padding: 20px;
-            max-width: 600px;
-            margin: 20px auto;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        .incorrect-list {
-            list-style: none;
-            padding: 0;
-        }
-        .incorrect-list li {
-            margin: 10px 0;
         }
     </style>
 </head>
 <body>
     <div class="result-container">
-        <h1>نتيجة الاختبار</h1>
-        <div id="score-result" class="result"></div>
+        <div class="result-header">
+            <h1>نتيجة الاختبار</h1>
+            <div id="score-result" class="result-summary"></div>
+        </div>
 
-        <!-- Incorrect answers list -->
-        <h2>الإجابات الخاطئة</h2>
-        <ul id="incorrect-answers-list" class="incorrect-list">
-            <!-- Incorrect answers will be inserted here -->
-        </ul>
+        <!-- Questions and answers will be displayed here -->
+        <div id="questions-container"></div>
 
         <button id="next-chapter" onclick="goToNextChapter()">الانتقال إلى الفصل التالي</button>
     </div>
@@ -73,10 +83,27 @@
     <script>
         // Sample questions and answers (replace with actual quiz data)
         const questions = [
-            { question: 'ما هي عاصمة فرنسا؟', correctAnswer: 'باريس', yourAnswer: '', correct: false },
-            { question: 'كم يساوي ٢ + ٢؟', correctAnswer: '٤', yourAnswer: '', correct: false },
-            { question: 'من كتب "هاملت"؟', correctAnswer: 'وليم شكسبير', yourAnswer: '', correct: false },
-            // Add more questions as needed
+            { 
+                question: 'ما هي عاصمة فرنسا؟', 
+                correctAnswer: 'باريس', 
+                answers: ['باريس', 'لندن', 'برلين'], 
+                yourAnswer: 'لندن', // Example of incorrect answer
+                correct: false 
+            },
+            { 
+                question: 'كم يساوي ٢ + ٢؟', 
+                correctAnswer: '٤', 
+                answers: ['٣', '٤', '٥'], 
+                yourAnswer: '٤', // Correct answer
+                correct: true 
+            },
+            { 
+                question: 'من كتب "هاملت"؟', 
+                correctAnswer: 'وليم شكسبير', 
+                answers: ['وليم شكسبير', 'تشارلز ديكنز', 'مارك توين'], 
+                yourAnswer: 'تشارلز ديكنز', // Example of incorrect answer
+                correct: false 
+            }
         ];
 
         // Function to get query parameters from URL
@@ -86,31 +113,44 @@
         }
 
         // Get the score from the URL and calculate passing criteria
-        const score = parseFloat(getQueryParameter('score'));
+        const score = parseFloat(getQueryParameter('score')) || 0;
         const passPercentage = 80; // Required percentage to pass
         const resultElement = document.getElementById('score-result');
-        const nextChapterButton = document.getElementById('next-chapter');
-        const incorrectAnswersList = document.getElementById('incorrect-answers-list');
+        const questionsContainer = document.getElementById('questions-container');
 
         function displayResults() {
             let correctAnswers = 0;
 
-            // Loop through questions and check answers (this should be generated during quiz submission)
+            // Loop through questions and display them
             questions.forEach((q, index) => {
-                // For demonstration purposes, we're assigning random answers here
-                // Replace this with actual answers received from the quiz page
-                q.yourAnswer = Math.random() > 0.5 ? q.correctAnswer : 'إجابة خاطئة ' + (index + 1);
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
 
-                // Check if the answer is correct
-                q.correct = q.yourAnswer === q.correctAnswer;
+                // Display the question
+                questionDiv.innerHTML = `<h3>${index + 1}. ${q.question}</h3>`;
+
+                // Display the answers
+                q.answers.forEach(answer => {
+                    const answerDiv = document.createElement('div');
+                    answerDiv.classList.add('answer');
+
+                    // Highlight if the answer is incorrect or correct
+                    if (answer === q.yourAnswer && !q.correct) {
+                        answerDiv.classList.add('incorrect');
+                    }
+                    if (answer === q.correctAnswer) {
+                        answerDiv.classList.add('correct');
+                    }
+
+                    answerDiv.innerText = answer;
+                    questionDiv.appendChild(answerDiv);
+                });
+
+                // Append the question and answers to the container
+                questionsContainer.appendChild(questionDiv);
+
                 if (q.correct) {
                     correctAnswers++;
-                } else {
-                    // Insert incorrect answers into the list
-                    const li = document.createElement('li');
-                    li.classList.add('incorrect-answer');
-                    li.innerHTML = `${q.question}: <strong>${q.yourAnswer}</strong>`;
-                    incorrectAnswersList.appendChild(li);
                 }
             });
 
@@ -125,11 +165,8 @@
             `;
 
             if (percentage >= passPercentage) {
-                resultElement.classList.add('pass');
                 resultElement.innerHTML += '<br>لقد اجتزت الاختبار!';
-                nextChapterButton.style.display = 'inline-block'; // Show "Next Chapter" button
             } else {
-                resultElement.classList.add('fail');
                 resultElement.innerHTML += '<br>للأسف لم تجتز الاختبار.';
             }
         }
