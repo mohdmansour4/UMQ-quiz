@@ -21,11 +21,10 @@
         .fail {
             color: red;
         }
-        .incorrect {
+        .incorrect-answer {
             color: red;
-        }
-        .correct {
-            color: green;
+            font-size: 18px;
+            margin: 10px 0;
         }
         #next-chapter {
             display: none; /* Initially hidden */
@@ -40,17 +39,20 @@
         #next-chapter:hover {
             background-color: #45a049;
         }
-        table {
-            width: 80%;
+        .result-container {
+            background-color: #f0f0f0; /* Light background */
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
             margin: 20px auto;
-            border-collapse: collapse;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
-        table, th, td {
-            border: 1px solid black;
+        .incorrect-list {
+            list-style: none;
+            padding: 0;
         }
-        th, td {
-            padding: 10px;
-            text-align: center;
+        .incorrect-list li {
+            margin: 10px 0;
         }
     </style>
 </head>
@@ -58,27 +60,18 @@
     <div class="result-container">
         <h1>نتيجة الاختبار</h1>
         <div id="score-result" class="result"></div>
-        
-        <!-- Incorrect answers table -->
-        <h2>إجابات غير صحيحة</h2>
-        <table id="incorrect-answers-table">
-            <thead>
-                <tr>
-                    <th>السؤال</th>
-                    <th>إجابتك</th>
-                    <th>الإجابة الصحيحة</th>
-                </tr>
-            </thead>
-            <tbody id="incorrect-answers-body">
-                <!-- Incorrect answers will be inserted here -->
-            </tbody>
-        </table>
+
+        <!-- Incorrect answers list -->
+        <h2>الإجابات الخاطئة</h2>
+        <ul id="incorrect-answers-list" class="incorrect-list">
+            <!-- Incorrect answers will be inserted here -->
+        </ul>
 
         <button id="next-chapter" onclick="goToNextChapter()">الانتقال إلى الفصل التالي</button>
     </div>
 
     <script>
-        // Sample questions and answers
+        // Sample questions and answers (replace with actual quiz data)
         const questions = [
             { question: 'ما هي عاصمة فرنسا؟', correctAnswer: 'باريس', yourAnswer: '', correct: false },
             { question: 'كم يساوي ٢ + ٢؟', correctAnswer: '٤', yourAnswer: '', correct: false },
@@ -97,7 +90,7 @@
         const passPercentage = 80; // Required percentage to pass
         const resultElement = document.getElementById('score-result');
         const nextChapterButton = document.getElementById('next-chapter');
-        const incorrectAnswersTable = document.getElementById('incorrect-answers-body');
+        const incorrectAnswersList = document.getElementById('incorrect-answers-list');
 
         function displayResults() {
             let correctAnswers = 0;
@@ -113,14 +106,11 @@
                 if (q.correct) {
                     correctAnswers++;
                 } else {
-                    // Insert incorrect answers into the table
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${q.question}</td>
-                        <td class="incorrect">${q.yourAnswer}</td>
-                        <td class="correct">${q.correctAnswer}</td>
-                    `;
-                    incorrectAnswersTable.appendChild(row);
+                    // Insert incorrect answers into the list
+                    const li = document.createElement('li');
+                    li.classList.add('incorrect-answer');
+                    li.innerHTML = `${q.question}: <strong>${q.yourAnswer}</strong>`;
+                    incorrectAnswersList.appendChild(li);
                 }
             });
 
