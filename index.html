@@ -48,9 +48,10 @@
             return array;
         }
 
-        // Define questions and answers
+        // Define questions and answers (with IDs for correct answer mapping)
         const quizData = [
             {
+                id: 'q1',
                 question: "القهوة المختصة تشير إلى القهوة التي تحصل على تقييم 70 نقطة أو أكثر على مقياس من 100 نقطة من مُقيم معتمد",
                 answers: [
                     { text: "صحيح", value: "صحيح" },
@@ -58,6 +59,7 @@
                 ]
             },
             {
+                id: 'q2',
                 question: "هل العبارة التالية صحيحة ام خاطئة؟ 'القهوة هي احد أكثر السلع تداوًال في العالم، حيث تأتي في المرتبة الثانية بعد النفط الخام.'",
                 answers: [
                     { text: "صحيحة", value: "صحيحة" },
@@ -65,6 +67,7 @@
                 ]
             },
             {
+                id: 'q3',
                 question: "اي من المعالجات التالية قد نحصل على عمر افتراضي اطول لها بعد الحمص؟",
                 answers: [
                     { text: "المعالجة المجففة", value: "المعالجة المجففة" },
@@ -73,6 +76,7 @@
                 ]
             },
             {
+                id: 'q4',
                 question: "المعالجة العسلية السوداء يتم تجفيفها لمدة تصل الى:",
                 answers: [
                     { text: "١٥ يوم", value: "١٥ يوم" },
@@ -81,6 +85,7 @@
                 ]
             },
             {
+                id: 'q5',
                 question: "جهاز الـDepulper يتم استخدامه لـ:",
                 answers: [
                     { text: "زالة الطبقة الهلامية من كرزة البن", value: "زالة الطبقة الهلامية من كرزة البن" },
@@ -89,6 +94,7 @@
                 ]
             },
             {
+                id: 'q6',
                 question: "للحفاظ على القهوة لمدة اطول ينصح بتخزينها بمكان بارد مثل داخل الثلاجة:",
                 answers: [
                     { text: "ينصح بذلك", value: "ينصح بذلك" },
@@ -96,6 +102,7 @@
                 ]
             },
             {
+                id: 'q7',
                 question: "ماهي فصيلة القهوة اللي تحتوي على قدر اعلى من الكافيين؟",
                 answers: [
                     { text: "ارابيكا", value: "ارابيكا" },
@@ -103,6 +110,7 @@
                 ]
             },
             {
+                id: 'q8',
                 question: "اي من طرق التحضير التالية تبقى القهوة على تواصل مع جميع الماء طوال فترة التحضير؟",
                 answers: [
                     { text: "الاسبريسو", value: "الاسبريسو" },
@@ -111,6 +119,7 @@
                 ]
             },
             {
+                id: 'q9',
                 question: "اي من فصائل القهوة التالية تعتبر معرضة اكثر للامراض وحصادها اقل؟",
                 answers: [
                     { text: "ارابيكا", value: "ارابيكا" },
@@ -118,6 +127,7 @@
                 ]
             },
             {
+                id: 'q10',
                 question: "نسبة الرطوبة المطلوبة بعد عملية المعالجة تكون من...:",
                 answers: [
                     { text: "١٢٪ الى ١٣٪", value: "١٢٪ الى ١٣٪" },
@@ -143,7 +153,7 @@
                 const label = document.createElement('label');
                 const input = document.createElement('input');
                 input.type = 'radio';
-                input.name = `q${index + 1}`;
+                input.name = q.id; // Use the question ID to match correct answers
                 input.value = answer.value;
                 input.required = true;
                 label.appendChild(input);
