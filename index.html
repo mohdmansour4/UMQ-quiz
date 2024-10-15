@@ -10,6 +10,7 @@
         body {
             direction: rtl; /* Right to left layout */
             font-family: 'Alexandria', sans-serif; /* Set font to Alexandria */
+            margin-right: 20px; /* Increase right indent */
         }
         h1 {
             text-align: center; /* Center the header */
@@ -29,21 +30,21 @@
         <!-- Question 1 -->
         <div>
             <h3>1. القهوة المختصة تشير إلى القهوة التي تحصل على تقييم 70 نقطة أو أكثر على مقياس من 100 نقطة من مُقيم معتمد</h3>
-            <label><input type="radio" name="q1" value="صحيح"> صحيح</label><br>
+            <label><input type="radio" name="q1" value="صحيح" required> صحيح</label><br>
             <label><input type="radio" name="q1" value="غير صحيح"> غير صحيح</label><br>
         </div>
 
         <!-- Question 2 -->
         <div>
             <h3>2. هل العبارة التالية صحيحة ام خاطئة؟ "القهوة هي احد أكثر السلع تداوًال في العالم، حيث تأتي في المرتبة الثانية بعد النفط الخام."</h3>
-            <label><input type="radio" name="q2" value="صحيحة"> صحيحة</label><br>
+            <label><input type="radio" name="q2" value="صحيحة" required> صحيحة</label><br>
             <label><input type="radio" name="q2" value="خاطئة"> خاطئة</label><br>
         </div>
 
         <!-- Question 3 -->
         <div>
             <h3>3. اي من المعالجات التالية قد نحصل على عمر افتراضي اطول لها بعد الحمص؟</h3>
-            <label><input type="radio" name="q3" value="المعالجة المجففة"> المعالجة المجففة</label><br>
+            <label><input type="radio" name="q3" value="المعالجة المجففة" required> المعالجة المجففة</label><br>
             <label><input type="radio" name="q3" value="المعالجة المغسولة"> المعالجة المغسولة</label><br>
             <label><input type="radio" name="q3" value="المعالجة العسلية"> المعالجة العسلية</label><br>
         </div>
@@ -51,7 +52,7 @@
         <!-- Question 4 -->
         <div>
             <h3>4. المعالجة العسلية السوداء يتم تجفيفها لمدة تصل الى</h3>
-            <label><input type="radio" name="q4" value="١٥ يوم"> ١٥ يوم</label><br>
+            <label><input type="radio" name="q4" value="١٥ يوم" required> ١٥ يوم</label><br>
             <label><input type="radio" name="q4" value="٢٠ يوم"> ٢٠ يوم</label><br>
             <label><input type="radio" name="q4" value="٣٠ يوم"> ٣٠ يوم</label><br>
         </div>
@@ -59,7 +60,7 @@
         <!-- Question 5 -->
         <div>
             <h3>5. جهاز الـDepulper يتم استخدامه لـ</h3>
-            <label><input type="radio" name="q5" value="زالة الطبقة الهلامية من كرزة البن"> ازالة الطبقة الهلامية من كرزة البن</label><br>
+            <label><input type="radio" name="q5" value="زالة الطبقة الهلامية من كرزة البن" required> ازالة الطبقة الهلامية من كرزة البن</label><br>
             <label><input type="radio" name="q5" value="ازالة القشرة الخارجية من كرزة البن"> ازالة القشرة الخارجية من كرزة البن</label><br>
             <label><input type="radio" name="q5" value="غسل كرزة البن"> غسل كرزة البن</label><br>
         </div>
@@ -67,21 +68,21 @@
         <!-- Question 6 -->
         <div>
             <h3>6. للحفاظ على القهوة لمدة اطول ينصح بتخزينها بمكان بارد مثل داخل الثلاجة</h3>
-            <label><input type="radio" name="q6" value="ينصح بذلك"> ينصح بذلك</label><br>
+            <label><input type="radio" name="q6" value="ينصح بذلك" required> ينصح بذلك</label><br>
             <label><input type="radio" name="q6" value="لا ينصح بذلك"> لا ينصح بذلك</label><br>
         </div>
 
         <!-- Question 7 -->
         <div>
             <h3>7. ماهي فصيلة القهوة اللي تحتوي على قدر اعلى من الكافيين؟</h3>
-            <label><input type="radio" name="q7" value="ارابيكا"> ارابيكا</label><br>
+            <label><input type="radio" name="q7" value="ارابيكا" required> ارابيكا</label><br>
             <label><input type="radio" name="q7" value="روبستا"> روبستا</label><br>
         </div>
 
         <!-- Question 8 -->
         <div>
             <h3>8. اي من طرق التحضير التالية تبقى القهوة على تواصل مع جميع الماء طوال فترة التحضير؟</h3>
-            <label><input type="radio" name="q8" value="الاسبريسو"> الاسبريسو</label><br>
+            <label><input type="radio" name="q8" value="الاسبريسو" required> الاسبريسو</label><br>
             <label><input type="radio" name="q8" value="الغمر الكلي"> الغمر الكلي</label><br>
             <label><input type="radio" name="q8" value="التقطير/الترشيح"> التقطير/الترشيح</label><br>
         </div>
@@ -89,14 +90,14 @@
         <!-- Question 9 -->
         <div>
             <h3>9. اي من فصائل القهوة التالية تعتبر معرضة اكثر للامراض وحصادها اقل؟</h3>
-            <label><input type="radio" name="q9" value="ارابيكا"> ارابيكا</label><br>
+            <label><input type="radio" name="q9" value="ارابيكا" required> ارابيكا</label><br>
             <label><input type="radio" name="q9" value="روبستا"> روبستا</label><br>
         </div>
 
         <!-- Question 10 -->
         <div>
             <h3>10. نسبة الرطوبة المطلوبة بعد عملية المعالجة تكون من...</h3>
-            <label><input type="radio" name="q10" value="١٢٪ الى ١٣٪"> ١٢٪ الى ١٣٪</label><br>
+            <label><input type="radio" name="q10" value="١٢٪ الى ١٣٪" required> ١٢٪ الى ١٣٪</label><br>
             <label><input type="radio" name="q10" value="١٣٪ الى ١٥٪"> ١٣٪ الى ١٥٪</label><br>
             <label><input type="radio" name="q10" value="١٠٪ الى ١٥٪"> ١٠٪ الى ١٥٪</label><br>
         </div>
