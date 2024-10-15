@@ -6,93 +6,66 @@
     <title>نتيجة الاختبار</title>
     <style>
         body {
-            direction: rtl; /* Right to left layout */
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f9f9f9;
-        }
-        .result-container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            direction: rtl;
+            font-family: 'Alexandria', sans-serif;
             text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
         }
-        .result-summary {
-            font-size: 18px;
-            margin: 20px 0;
-        }
-        .pass {
-            color: green;
+        h1 {
             font-weight: bold;
+            margin-bottom: 20px;
         }
-        .fail {
-            color: red;
-            font-weight: bold;
+        p {
+            font-size: 20px;
+            margin: 10px 0;
         }
         button {
+            font-size: 18px;
             padding: 10px 20px;
-            background-color: #4CAF50;
+            margin: 20px;
+            cursor: pointer;
+            background-color: #007BFF;
             color: white;
             border: none;
-            cursor: pointer;
-            font-size: 18px;
-            display: block;
-            margin: 20px auto;
+            border-radius: 5px;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="result-container">
-        <h1>نتيجة الاختبار</h1>
-        <div id="score-result" class="result-summary"></div>
-        <div id="pass-fail-message"></div>
-        <button id="next-chapter" onclick="goToNextChapter()" style="display:none;">الانتقال إلى الفصل التالي</button>
-    </div>
 
+    <h1>نتيجة الاختبار</h1>
+    <p id="score"></p>
+    <p id="failMessage" style="display: none;">الحد الأدنى للنجاح: 80%</p>
+
+    <!-- Retry button, appears only if the user fails -->
+    <button id="retryButton" style="display: none;" onclick="retry()">إعادة الاختبار</button>
+
+    <!-- Script to handle score display and button/message visibility -->
     <script>
-        // Function to get the score from the URL parameter
-        function getScoreFromURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return parseFloat(urlParams.get('score')) || 0;
+        // Get the score from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const score = urlParams.get('score');
+
+        // Display the score to the user
+        document.getElementById('score').textContent = `لقد حصلت على نسبة: ${score}%`;
+
+        // Minimum score required to pass
+        const passingScore = 80;
+
+        // If the score is less than the passing score, show the "Retry" button and fail message
+        if (parseFloat(score) < passingScore) {
+            document.getElementById('retryButton').style.display = 'inline-block';
+            document.getElementById('failMessage').style.display = 'block';
         }
 
-        function displayResults() {
-            const resultElement = document.getElementById('score-result');
-            const passFailMessage = document.getElementById('pass-fail-message');
-            const nextChapterButton = document.getElementById('next-chapter');
-
-            // Get the score from the URL and display it
-            const score = getScoreFromURL();
-            const passPercentage = 80.0; // Set the pass percentage to 80%
-
-            resultElement.innerHTML = `لقد حصلت على: ${score.toFixed(2)}%<br>الحد الأدنى للاجتياز: ${passPercentage.toFixed(2)}%`;
-
-            // 80% pass rule
-            if (score >= passPercentage) {
-                passFailMessage.classList.add('pass');
-                passFailMessage.innerHTML = 'مبروك! لقد اجتزت الاختبار!';
-                nextChapterButton.style.display = 'inline-block'; // Show "Next Chapter" button
-            } else {
-                passFailMessage.classList.add('fail');
-                passFailMessage.innerHTML = 'للأسف، لم تجتز الاختبار. تحتاج إلى 80% للاجتياز.';
-            }
+        // Function to redirect to the retry link
+        function retry() {
+            window.location.href = 'https://umqlearning.crd.co/#section13';
         }
-
-        function goToNextChapter() {
-            // Replace this URL with the actual link to the next chapter
-            window.location.href = "https://umqlearning.crd.co/#section14";
-        }
-
-        // Display the results once the page is loaded
-        window.onload = function() {
-            displayResults();
-        };
     </script>
 </body>
 </html>
