@@ -9,7 +9,7 @@
             direction: rtl;
             font-family: 'Alexandria', sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
+            background-color: transparent; /* Make background transparent */
             padding: 20px;
         }
         h1 {
@@ -44,6 +44,9 @@
     <!-- Retry button, appears only if the user fails -->
     <button id="retryButton" style="display: none;" onclick="retry()">إعادة الاختبار</button>
 
+    <!-- Button for users who pass, appears only if the user passes -->
+    <button id="nextChapterButton" style="display: none;" onclick="goToNextChapter()">التالي: الفصل القادم</button>
+
     <!-- Script to handle score display and button/message visibility -->
     <script>
         // Get the score from the URL
@@ -60,11 +63,19 @@
         if (parseFloat(score) < passingScore) {
             document.getElementById('retryButton').style.display = 'inline-block';
             document.getElementById('failMessage').style.display = 'block';
+        } else {
+            // If the user passes, show the "Next Chapter" button
+            document.getElementById('nextChapterButton').style.display = 'inline-block';
         }
 
         // Function to redirect to the retry link
         function retry() {
             window.location.href = 'https://umqlearning.crd.co/#section13';
+        }
+
+        // Function to redirect to the next chapter (replace with actual URL)
+        function goToNextChapter() {
+            window.location.href = 'https://your-next-chapter-url.com'; // Replace this URL with the actual next chapter link
         }
     </script>
 </body>
