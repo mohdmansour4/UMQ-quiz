@@ -31,105 +31,147 @@
 <body>
     <h1>الإختبار الاول: مدخل عن القهوة المختصة</h1>
     <form id="quizForm">
-        <!-- Question 1 -->
-        <div>
-            <h3>1. القهوة المختصة تشير إلى القهوة التي تحصل على تقييم 70 نقطة أو أكثر على مقياس من 100 نقطة من مُقيم معتمد</h3>
-            <label><input type="radio" name="q1" value="صحيح" required> صحيح</label><br>
-            <label><input type="radio" name="q1" value="غير صحيح"> غير صحيح</label><br>
-        </div>
-
-        <!-- Question 2 -->
-        <div>
-            <h3>2. هل العبارة التالية صحيحة ام خاطئة؟ "القهوة هي احد أكثر السلع تداوًال في العالم، حيث تأتي في المرتبة الثانية بعد النفط الخام."</h3>
-            <label><input type="radio" name="q2" value="صحيحة" required> صحيحة</label><br>
-            <label><input type="radio" name="q2" value="خاطئة"> خاطئة</label><br>
-        </div>
-
-        <!-- Question 3 -->
-        <div>
-            <h3>3. اي من المعالجات التالية قد نحصل على عمر افتراضي اطول لها بعد الحمص؟</h3>
-            <label><input type="radio" name="q3" value="المعالجة المجففة" required> المعالجة المجففة</label><br>
-            <label><input type="radio" name="q3" value="المعالجة المغسولة"> المعالجة المغسولة</label><br>
-            <label><input type="radio" name="q3" value="المعالجة العسلية"> المعالجة العسلية</label><br>
-        </div>
-
-        <!-- Question 4 -->
-        <div>
-            <h3>4. المعالجة العسلية السوداء يتم تجفيفها لمدة تصل الى:</h3>
-            <label><input type="radio" name="q4" value="١٥ يوم" required> ١٥ يوم</label><br>
-            <label><input type="radio" name="q4" value="٢٠ يوم"> ٢٠ يوم</label><br>
-            <label><input type="radio" name="q4" value="٣٠ يوم"> ٣٠ يوم</label><br>
-        </div>
-
-        <!-- Question 5 -->
-        <div>
-            <h3>5. جهاز الـDepulper يتم استخدامه لـ:</h3>
-            <label><input type="radio" name="q5" value="زالة الطبقة الهلامية من كرزة البن" required> ازالة الطبقة الهلامية من كرزة البن</label><br>
-            <label><input type="radio" name="q5" value="ازالة القشرة الخارجية من كرزة البن"> ازالة القشرة الخارجية من كرزة البن</label><br>
-            <label><input type="radio" name="q5" value="غسل كرزة البن"> غسل كرزة البن</label><br>
-        </div>
-
-        <!-- Question 6 -->
-        <div>
-            <h3>6. للحفاظ على القهوة لمدة اطول ينصح بتخزينها بمكان بارد مثل داخل الثلاجة:</h3>
-            <label><input type="radio" name="q6" value="ينصح بذلك" required> ينصح بذلك</label><br>
-            <label><input type="radio" name="q6" value="لا ينصح بذلك"> لا ينصح بذلك</label><br>
-        </div>
-
-        <!-- Question 7 -->
-        <div>
-            <h3>7. ماهي فصيلة القهوة اللي تحتوي على قدر اعلى من الكافيين؟</h3>
-            <label><input type="radio" name="q7" value="ارابيكا" required> ارابيكا</label><br>
-            <label><input type="radio" name="q7" value="روبستا"> روبستا</label><br>
-        </div>
-
-        <!-- Question 8 -->
-        <div>
-            <h3>8. اي من طرق التحضير التالية تبقى القهوة على تواصل مع جميع الماء طوال فترة التحضير؟</h3>
-            <label><input type="radio" name="q8" value="الاسبريسو" required> الاسبريسو</label><br>
-            <label><input type="radio" name="q8" value="الغمر الكلي"> الغمر الكلي</label><br>
-            <label><input type="radio" name="q8" value="التقطير/الترشيح"> التقطير/الترشيح</label><br>
-        </div>
-
-        <!-- Question 9 -->
-        <div>
-            <h3>9. اي من فصائل القهوة التالية تعتبر معرضة اكثر للامراض وحصادها اقل؟</h3>
-            <label><input type="radio" name="q9" value="ارابيكا" required> ارابيكا</label><br>
-            <label><input type="radio" name="q9" value="روبستا"> روبستا</label><br>
-        </div>
-
-        <!-- Question 10 -->
-        <div>
-            <h3>10. نسبة الرطوبة المطلوبة بعد عملية المعالجة تكون من...:</h3>
-            <label><input type="radio" name="q10" value="١٢٪ الى ١٣٪" required> ١٢٪ الى ١٣٪</label><br>
-            <label><input type="radio" name="q10" value="١٣٪ الى ١٥٪"> ١٣٪ الى ١٥٪</label><br>
-            <label><input type="radio" name="q10" value="١٠٪ الى ١٥٪"> ١٠٪ الى ١٥٪</label><br>
-        </div>
+        <!-- Container for the shuffled questions -->
+        <div id="questionsContainer"></div>
 
         <!-- Centered Button -->
         <button type="submit">إنهاء الاختبار</button>
     </form>
 
     <script>
-        // Capture the user's answers and redirect to the results page
+        // Shuffle function
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Define questions and answers
+        const quizData = [
+            {
+                question: "1. القهوة المختصة تشير إلى القهوة التي تحصل على تقييم 70 نقطة أو أكثر على مقياس من 100 نقطة من مُقيم معتمد",
+                answers: [
+                    { text: "صحيح", value: "صحيح" },
+                    { text: "غير صحيح", value: "غير صحيح" }
+                ]
+            },
+            {
+                question: "2. هل العبارة التالية صحيحة ام خاطئة؟ 'القهوة هي احد أكثر السلع تداوًال في العالم، حيث تأتي في المرتبة الثانية بعد النفط الخام.'",
+                answers: [
+                    { text: "صحيحة", value: "صحيحة" },
+                    { text: "خاطئة", value: "خاطئة" }
+                ]
+            },
+            {
+                question: "3. اي من المعالجات التالية قد نحصل على عمر افتراضي اطول لها بعد الحمص؟",
+                answers: [
+                    { text: "المعالجة المجففة", value: "المعالجة المجففة" },
+                    { text: "المعالجة المغسولة", value: "المعالجة المغسولة" },
+                    { text: "المعالجة العسلية", value: "المعالجة العسلية" }
+                ]
+            },
+            {
+                question: "4. المعالجة العسلية السوداء يتم تجفيفها لمدة تصل الى:",
+                answers: [
+                    { text: "١٥ يوم", value: "١٥ يوم" },
+                    { text: "٢٠ يوم", value: "٢٠ يوم" },
+                    { text: "٣٠ يوم", value: "٣٠ يوم" }
+                ]
+            },
+            {
+                question: "5. جهاز الـDepulper يتم استخدامه لـ:",
+                answers: [
+                    { text: "زالة الطبقة الهلامية من كرزة البن", value: "زالة الطبقة الهلامية من كرزة البن" },
+                    { text: "ازالة القشرة الخارجية من كرزة البن", value: "ازالة القشرة الخارجية من كرزة البن" },
+                    { text: "غسل كرزة البن", value: "غسل كرزة البن" }
+                ]
+            },
+            {
+                question: "6. للحفاظ على القهوة لمدة اطول ينصح بتخزينها بمكان بارد مثل داخل الثلاجة:",
+                answers: [
+                    { text: "ينصح بذلك", value: "ينصح بذلك" },
+                    { text: "لا ينصح بذلك", value: "لا ينصح بذلك" }
+                ]
+            },
+            {
+                question: "7. ماهي فصيلة القهوة اللي تحتوي على قدر اعلى من الكافيين؟",
+                answers: [
+                    { text: "ارابيكا", value: "ارابيكا" },
+                    { text: "روبستا", value: "روبستا" }
+                ]
+            },
+            {
+                question: "8. اي من طرق التحضير التالية تبقى القهوة على تواصل مع جميع الماء طوال فترة التحضير؟",
+                answers: [
+                    { text: "الاسبريسو", value: "الاسبريسو" },
+                    { text: "الغمر الكلي", value: "الغمر الكلي" },
+                    { text: "التقطير/الترشيح", value: "التقطير/الترشيح" }
+                ]
+            },
+            {
+                question: "9. اي من فصائل القهوة التالية تعتبر معرضة اكثر للامراض وحصادها اقل؟",
+                answers: [
+                    { text: "ارابيكا", value: "ارابيكا" },
+                    { text: "روبستا", value: "روبستا" }
+                ]
+            },
+            {
+                question: "10. نسبة الرطوبة المطلوبة بعد عملية المعالجة تكون من...:",
+                answers: [
+                    { text: "١٢٪ الى ١٣٪", value: "١٢٪ الى ١٣٪" },
+                    { text: "١٣٪ الى ١٥٪", value: "١٣٪ الى ١٥٪" },
+                    { text: "١٠٪ الى ١٥٪", value: "١٠٪ الى ١٥٪" }
+                ]
+            }
+        ];
+
+        // Shuffle both the questions and their answers
+        const shuffledQuestions = shuffle(quizData);
+        shuffledQuestions.forEach(q => shuffle(q.answers));
+
+        // Render the shuffled questions and answers to the DOM
+        const questionsContainer = document.getElementById('questionsContainer');
+        shuffledQuestions.forEach((q, index) => {
+            const questionDiv = document.createElement('div');
+            const questionTitle = document.createElement('h3');
+            questionTitle.textContent = q.question;
+            questionDiv.appendChild(questionTitle);
+
+            q.answers.forEach(answer => {
+                const label = document.createElement('label');
+                const input = document.createElement('input');
+                input.type = 'radio';
+                input.name = `q${index + 1}`;
+                input.value = answer.value;
+                input.required = true;
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(` ${answer.text}`));
+                questionDiv.appendChild(label);
+                questionDiv.appendChild(document.createElement('br'));
+            });
+
+            questionsContainer.appendChild(questionDiv);
+        });
+
+        // Form submit logic remains the same
         document.getElementById('quizForm').onsubmit = function (e) {
             e.preventDefault();
 
-            // Get the selected answers from the form
             const formData = new FormData(this);
             const answers = {};
             formData.forEach((value, key) => {
                 answers[key] = value;
             });
 
-            // Calculate score based on answers
-            let correctAnswers = 0;
+            // Correct answers mapping
             const correctAnswerKey = {
                 q1: 'غير صحيح',
                 q2: 'صحيحة',
                 q3: 'المعالجة المجففة',
                 q4: '٣٠ يوم',
-                q5: 'ازالة القشرة الخارجية من كرزة البن',
+                q5: 'زالة الطبقة الهلامية من كرزة البن',
                 q6: 'لا ينصح بذلك',
                 q7: 'روبستا',
                 q8: 'الغمر الكلي',
@@ -137,26 +179,25 @@
                 q10: '١٢٪ الى ١٣٪'
             };
 
-            // Calculate the score
-            for (let key in answers) {
+            // Calculate score
+            let correctAnswers = 0;
+            Object.keys(answers).forEach(key => {
                 if (answers[key] === correctAnswerKey[key]) {
                     correctAnswers++;
                 }
-            }
+            });
 
-            // Calculate the percentage score
+            // Calculate percentage
             const totalQuestions = 10;
             const score = (correctAnswers / totalQuestions) * 100;
 
-            // Convert the answers to a URL-encoded string to pass via URL
+            // Redirect to results page with score
             const encodedAnswers = encodeURIComponent(JSON.stringify(answers));
-
-            // Redirect to the results page with the answers and score
             window.location.href = `results.html?answers=${encodedAnswers}&score=${score.toFixed(2)}`;
-        }
+        };
 
-        // Reset the radio buttons when the page is reloaded or user goes back
-        window.onload = function() {
+        // Reset form on reload
+        window.onload = function () {
             document.getElementById('quizForm').reset();
         };
     </script>
