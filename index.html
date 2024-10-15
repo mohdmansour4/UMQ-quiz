@@ -11,6 +11,7 @@
             direction: rtl; /* Right to left layout */
             font-family: 'Alexandria', sans-serif; /* Set font to Alexandria */
             margin-right: 5px; /* Decrease right indent */
+            background-color: #f4f4f4; /* Add a background color for visual clarity */
         }
         h1 {
             text-align: center; /* Center the header */
@@ -20,11 +21,28 @@
         h3 {
             font-weight: normal; /* Ensure that the questions are not bold */
         }
+        .question {
+            margin-bottom: 20px; /* Add space between questions */
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd; /* Add a visual divider between questions */
+        }
+        .answer {
+            display: block;
+            margin: 10px 0; /* Add space between each answer */
+        }
         button {
             display: block; /* Makes button block-level to center */
             margin: 20px auto; /* Centers the button and adds spacing */
             font-size: 18px;
             padding: 15px 30px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -145,6 +163,8 @@
         const questionsContainer = document.getElementById('questionsContainer');
         shuffledQuestions.forEach((q, index) => {
             const questionDiv = document.createElement('div');
+            questionDiv.classList.add('question'); // Add class to style questions
+
             const questionTitle = document.createElement('h3');
             questionTitle.textContent = q.question;
             questionDiv.appendChild(questionTitle);
@@ -158,8 +178,8 @@
                 input.required = true;
                 label.appendChild(input);
                 label.appendChild(document.createTextNode(` ${answer.text}`));
+                label.classList.add('answer'); // Add class to style answers
                 questionDiv.appendChild(label);
-                questionDiv.appendChild(document.createElement('br'));
             });
 
             questionsContainer.appendChild(questionDiv);
