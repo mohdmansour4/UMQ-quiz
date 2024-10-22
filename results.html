@@ -9,7 +9,7 @@
             direction: rtl;
             font-family: 'Alexandria', sans-serif;
             text-align: center;
-            background-color: transparent; /* Make background transparent */
+            background-color: transparent;
             padding: 20px;
         }
         h1 {
@@ -73,9 +73,9 @@
             window.location.href = 'https://umqlearning.crd.co/#section13';
         }
 
-        // Function to redirect to the next chapter (replace with actual URL)
+        // Function to redirect to the next chapter, but make sure it opens outside of the iframe
         function goToNextChapter() {
-            window.location.href = 'https://umqlearning.crd.co/#section14'; // Replace this URL with the actual next chapter link
+            window.open('https://umqlearning.crd.co/#section14', '_parent'); // Replace this URL with the actual next chapter link
         }
     </script>
 </body>
